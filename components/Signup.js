@@ -37,8 +37,7 @@ function SignupFunction({ appData }) {
   const [goBackStyles, setGoBackStyles] = useState("hidden");
   const [alertMessage, setAlertMessage] = useState("");
   const [alertStyles, setAlertStyles] = useState("hidden");
-  const [showPassword, setShowPassword] = useState(false)
-;
+  const [showPassword, setShowPassword] = useState(false);
   // regex expression for checking if a string is a valid email address
   const regexExp =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
@@ -58,7 +57,7 @@ function SignupFunction({ appData }) {
 
   const handlePasswordInput = (passwordInput) => {
     // hides the progress bar if there is no password entered
-    if (passwordInput.length != 0) setBarWrapperClass("pt-3");
+    if (passwordInput.length !== 0) setBarWrapperClass("pt-3");
     else setBarWrapperClass("pt-3 hidden");
 
     // updates the password in react state
@@ -129,9 +128,9 @@ function SignupFunction({ appData }) {
     // makes post request for the signup api
     axios
       .post("https://id-api.kreativeusa.com/v1/accounts/signup", {
-        email,
+        email: email.toLowerCase(),
+        username: username.toLowerCase(),
         password,
-        username,
         firstName: fname,
         lastName: lname,
         aidn: appData.aidn,
@@ -198,7 +197,7 @@ function SignupFunction({ appData }) {
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
                 {title}
               </h2>
-              <p className="mt-2 text-md text-gray-600">{subtitle}</p>
+              <p className="text-md mt-2 text-gray-600">{subtitle}</p>
             </div>
             <div id="alert" className={alertStyles}>
               <AlertComponent message={alertMessage} />
@@ -295,10 +294,10 @@ function SignupFunction({ appData }) {
                       >
                         {showPassword ? (
                           <EyeSlashIcon
-                          className="h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        ): (
+                            className="h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        ) : (
                           <EyeIcon
                             className="h-5 w-5 text-gray-400"
                             aria-hidden="true"

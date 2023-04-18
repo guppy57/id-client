@@ -62,7 +62,7 @@ function ForgotPasswordFunction({ appData }) {
 
   const handlePasswordInput = (passwordInput) => {
     // hides the progress bar if there is no password entered
-    if (passwordInput.length != 0) setBarWrapperClass("pb-3");
+    if (passwordInput.length !== 0) setBarWrapperClass("pb-3");
     else setBarWrapperClass("pb-3 hidden");
 
     // updates the password in react state
@@ -118,7 +118,7 @@ function ForgotPasswordFunction({ appData }) {
     // makes post request to create a reset code
     axios
       .post("https://id-api.kreativeusa.com/v1/accounts/resetCode/send", {
-        email,
+        email: email.toLowerCase(),
       })
       .then((response) => {
         setFindAccountStyles("hidden");
@@ -262,7 +262,7 @@ function ForgotPasswordFunction({ appData }) {
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
                 {title}
               </h2>
-              <p className="mt-2 text-md text-gray-600">{subtitle}</p>
+              <p className="text-md mt-2 text-gray-600">{subtitle}</p>
             </div>
             <div id="alert" className={alertStyles}>
               <AlertComponent message={alertMessage} />
@@ -325,7 +325,7 @@ function ForgotPasswordFunction({ appData }) {
                   </div>
 
                   <div id="new-password" className={newPasswordStyles}>
-                  <div className="relative flex flex-grow items-stretch focus-within:z-10">
+                    <div className="relative flex flex-grow items-stretch focus-within:z-10">
                       <label htmlFor="password" className="sr-only">
                         Password
                       </label>
@@ -347,10 +347,10 @@ function ForgotPasswordFunction({ appData }) {
                       >
                         {showNewPassword ? (
                           <EyeSlashIcon
-                          className="h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        ): (
+                            className="h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                          />
+                        ) : (
                           <EyeIcon
                             className="h-5 w-5 text-gray-400"
                             aria-hidden="true"
@@ -385,7 +385,7 @@ function ForgotPasswordFunction({ appData }) {
                     <div>
                       <button
                         onClick={(e) => createNewPassword(e)}
-                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 mt-3 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="group relative mt-3 flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         Set new password
                       </button>
