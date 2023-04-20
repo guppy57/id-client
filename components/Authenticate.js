@@ -89,6 +89,8 @@ export default function AuthenticateComponent({ children, permissions }) {
               // user does not have the correct permissions to continue
               // we can't just say the user isn't authenticated, because they are, they just don't have the correct permissions
               // FOR NOW we will handle the error by redirecting the user to the error page with a query param for the error
+              removeCookie("kreative_id_key");
+              removeCookie("keychain_id");
               window.location.href = `/error?cause=permissions&aidn=${AIDN}`;
             } else {
               // since we can't add headers, since we are executing this on the client side, we will just setup new cookies
