@@ -18,7 +18,10 @@ export default function AuthenticateComponent({ children, permissions }) {
   // this sets default state to not authenticate so that the function won't render until useEffect has run
   const [authenticated, setAuthenticated] = useState(false);
   // the single cookie we need for this function, stores the key for the user
-  const [cookies, setCookie] = useCookies(["kreative_id_key", "keychain_id"]);
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "kreative_id_key",
+    "keychain_id",
+  ]);
   // global state for the account data
   const [account, setAccount] = useAtom(accountStore);
 
@@ -44,18 +47,31 @@ export default function AuthenticateComponent({ children, permissions }) {
           .unauthorized((error) => {
             // unauthorized exception, meaning that the keychain is expired
             // relocates to signin page with the callback for 'Kreative ID Test'
+            removeCookie("kreative_id_key");
+            removeCookie("keychain_id");
             window.location.href = `/signin?aidn=${AIDN}&message=${error.message}`;
           })
           .forbidden((error) => {
             // aidn given is not the same as the one on the keychain
             // this is a weird error that would even happen, so we will just reauthenticate the user
             // relocates to signin page with the callback for 'Kreative ID Test'
+            removeCookie("kreative_id_key");
+            removeCookie("keychain_id");
             window.location.href = `/signin?aidn=${AIDN}&message=${error.message}`;
           })
           .internalError((error) => {
             // since there is something on the server side that isn't working reauthenticating wont work
             // instead we will redirect the user to an auth error page
+            removeCookie("kreative_id_key");
+            removeCookie("keychain_id");
             window.location.href = `/error?cause=ise&aidn=${AIDN}&message=${error.message}`;
+          })
+          .notFound((error) => {
+            // the keychain does not exist, meaning that the user has never signed in
+            // relocates to signin page with the callback for 'Kreative ID Test'
+            removeCookie("kreative_id_key");
+            removeCookie("keychain_id");
+            window.location.href = `/signin?aidn=${AIDN}&message=${error.message}`;
           })
           .json((response) => {
             const account = response.data.account;
@@ -91,6 +107,8 @@ export default function AuthenticateComponent({ children, permissions }) {
           })
           .catch((error) => {
             // some sort of unknown error, possibly on the client side itself
+            removeCookie("kreative_id_key");
+            removeCookie("keychain_id");
             window.location.href = `/error?cause=unknown&aidn=${AIDN}&message=${error.message}`;
           });
       }
