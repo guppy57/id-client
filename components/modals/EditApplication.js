@@ -16,7 +16,7 @@ export default function EditApplicationModal({ state, setState }) {
   const [message, setMessage] = useState("");
 
   // global states
-  const [appData, setAppData] = useAtom(appDataStore);
+  const [appData] = useAtom(appDataStore);
 
   // temporary states, initialized to be empty
   const [appName, setAppName] = useState("");
@@ -191,7 +191,7 @@ export default function EditApplicationModal({ state, setState }) {
       );
       setAlertStyles("");
     },
-    onSuccess: (data) => {
+    onSuccess: () => {
       // close the modal since the method completely succeeded
       setState(false);
       // invalidate the query so that the data will be refreshed
