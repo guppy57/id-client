@@ -18,6 +18,7 @@ export default function CreateApplicationModal({ state, setState }) {
   const [description, setDescription] = useState("");
   const [logoUrl, setLogoUrl] = useState("");
   const [iconUrl, setIconUrl] = useState("");
+  const [basePermission, setBasePermission] = useState("");
 
   // alert message styles
   const [alertStyles, setAlertStyles] = useState("hidden");
@@ -42,6 +43,7 @@ export default function CreateApplicationModal({ state, setState }) {
             homepage,
             logoUrl,
             iconUrl,
+            basePermission,
           },
           {
             headers: {
@@ -60,11 +62,11 @@ export default function CreateApplicationModal({ state, setState }) {
       return response.data;
     },
     onError: (error) => {
-      // some sort of error occured
+      // some sort of error occurred
       // handle any errors produced from the request
       console.log(error);
       setMessage(
-        `Internal server error occured. Please try again later. ERROR: ${error.message}`
+        `Internal server error occurred. Please try again later. ERROR: ${error.message}`
       );
       setAlertStyles("");
     },
@@ -79,6 +81,7 @@ export default function CreateApplicationModal({ state, setState }) {
       setHomepage("");
       setLogoUrl("");
       setIconUrl("");
+      setBasePermission("");
 
       // we tell queryClient that the cached data we currently have is invalid
       // this will force a refetch that contains the newly created application
@@ -99,7 +102,8 @@ export default function CreateApplicationModal({ state, setState }) {
       appName === "" ||
       callback === "" ||
       homepage === "" ||
-      description === ""
+      description === "" ||
+      basePermission === ""
     ) {
       setMessage("Please fill out all fields");
       setAlertStyles("");
@@ -262,7 +266,7 @@ export default function CreateApplicationModal({ state, setState }) {
                         <textarea
                           id="description"
                           name="description"
-                          rows={3}
+                          rows={2}
                           className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder={"End to end asteroid mining service..."}
                           value={description}
@@ -320,10 +324,27 @@ export default function CreateApplicationModal({ state, setState }) {
                     </div>
                   </div>
                 </div>
+                <div className="pt-2 pb-2">
+                  <label
+                    htmlFor="basePermission"
+                    className="block text-left text-sm font-medium text-gray-700"
+                  >
+                    Base Permission
+                  </label>
+                  <input
+                    type="text"
+                    id="basePermission"
+                    name="basePermission"
+                    className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    placeholder={"KREATIVE_DREAMER"}
+                    value={basePermission}
+                    onChange={(e) => basePermission(e.target.value)}
+                  />
+                </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-3 sm:gap-3">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 sm:col-start-2 sm:col-span-2 sm:text-sm"
+                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 sm:col-span-2 sm:col-start-2 sm:text-sm"
                     onClick={(e) => createApplication(e)}
                   >
                     Create application

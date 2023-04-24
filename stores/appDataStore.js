@@ -9,6 +9,7 @@ const appDataStore = atom({
   description: "",
   logoUrl: "",
   iconUrl: "",
+  basePermission: "",
 });
 
 export { appDataStore };

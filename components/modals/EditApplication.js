@@ -26,6 +26,7 @@ export default function EditApplicationModal({ state, setState }) {
   const [logoUrl, setLogo] = useState("");
   const [iconUrl, setIcon] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [basePermission, setBasePermission] = useState("");
 
   // sets the local states based on appData global state
   // there is some sort of async issue where setting the default value of the temp states
@@ -39,6 +40,7 @@ export default function EditApplicationModal({ state, setState }) {
     setDescription(appData.description);
     setLogo(appData.logoUrl);
     setIcon(appData.iconUrl);
+    setBasePermission(appData.basePermission);
   }, [appData]);
 
   const setOpen = (isOpen) => {
@@ -68,6 +70,7 @@ export default function EditApplicationModal({ state, setState }) {
             description,
             logoUrl,
             iconUrl,
+            basePermission,
           },
           {
             headers: {
@@ -112,7 +115,8 @@ export default function EditApplicationModal({ state, setState }) {
       appName === "" ||
       callback === "" ||
       homepage === "" ||
-      description === ""
+      description === "" ||
+      basePermission === ""
     ) {
       setMessage("Please fill out all fields.");
       setAlertStyles("");
@@ -145,6 +149,7 @@ export default function EditApplicationModal({ state, setState }) {
       description === appData.description &&
       logoUrl === appData.logoUrl &&
       iconUrl === appData.iconUrl &&
+      basePermission === appData.basePermission &&
       refresh === false
     ) {
       setMessage("No changes were made.");
@@ -384,6 +389,26 @@ export default function EditApplicationModal({ state, setState }) {
                               </div>
                             </div>
                           </div>
+                        </div>
+                      </div>
+                      <div className="pt-2 pb-2">
+                        <label
+                          htmlFor="basePermission"
+                          className="block text-left text-sm font-medium text-gray-700"
+                        >
+                          Base Permission
+                        </label>
+                        <div className="mt-1 flex rounded-md shadow-sm">
+                          <input
+                            type="text"
+                            name="basePermission"
+                            id="basePermission"
+                            className="block w-full min-w-0 flex-1 rounded-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            placeholder="KREATIVE_DREAMER"
+                            required
+                            value={basePermission}
+                            onChange={(e) => setBasePermission(e.target.value)}
+                          />
                         </div>
                       </div>
                       <div className="relative flex items-start py-4">
