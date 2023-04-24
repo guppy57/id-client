@@ -89,6 +89,12 @@ export default function AppsTableComponent() {
                       </th>
                       <th
                         scope="col"
+                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                      >
+                        Base Permission
+                      </th>
+                      <th
+                        scope="col"
                         className="relative py-3 pl-3 pr-4 sm:pr-6"
                       >
                         <span className="sr-only">Edit and View</span>
@@ -107,6 +113,7 @@ export default function AppsTableComponent() {
                         description={app.description}
                         logoUrl={app.logoUrl}
                         iconUrl={app.iconUrl}
+                        basePermission={app.basePermission}
                       />
                     ))}
                   </tbody>
