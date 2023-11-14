@@ -250,7 +250,7 @@ function ForgotPasswordFunction({ appData }) {
 
   const goBack = (e) => {
     e.preventDefault();
-    window.location.href = `/signin?aidn=${appData.aidn}`;
+    router.push(`/signin?aidn=${appData.aidn}`);
   };
 
   return (

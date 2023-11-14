@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-
+import { useRouter } from "next/router";
 import { editAppModalStore } from "../../../stores/editAppModalStore";
 import { appDataStore } from "../../../stores/appDataStore";
 
@@ -14,6 +14,7 @@ export default function AppRowComponent({
   iconUrl,
   basePermission,
 }) {
+  const router = useRouter();
   const [editState, setEditState] = useAtom(editAppModalStore);
   const [appData, setAppData] = useAtom(appDataStore);
 
@@ -40,7 +41,7 @@ export default function AppRowComponent({
     event.preventDefault();
 
     // redirects user to a page for this current app
-    window.location.href = `/admin/apps/${aidn}`;
+    router.push(`/admin/apps/${aidn}`);
   };
 
   return (

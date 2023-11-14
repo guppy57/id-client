@@ -1,10 +1,12 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function AdminHome(): JSX.Element {
+  const router = useRouter();
 
   useEffect(() => {
-    window.location.href = "/admin/apps";
+    router.push("/admin/apps");  
   }, []);
 
   return (
