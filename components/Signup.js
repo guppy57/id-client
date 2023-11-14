@@ -68,23 +68,30 @@ function SignupFunction({ appData }) {
     setPasswordScore(score);
 
     // changes progress bar strength based on score
-    if (passwordScore === 0 || passwordScore === 1) {
+    if (passwordScore === 0) {
       changeProgressBar(
-        "Password weak",
+        "Password is weak",
         "h-2.5 w-4/12 rounded-full bg-red-600",
         "20%",
         "text-sm text-red-600"
       );
-    } else if (passwordScore === 2) {
+    } else if (1 === passwordScore) {
       changeProgressBar(
-        "Password almost there",
+        "Password is good",
         "h-2.5 w-8/12 rounded-full bg-yellow-500",
         "75%",
         "text-sm text-yellow-500"
       );
-    } else if (passwordScore === 3 || passwordScore === 4) {
+    } else if (2 === passwordScore || 3 === passwordScore) {
       changeProgressBar(
-        "Strong password",
+        "Password is getting stronger",
+        "h-2.5 w-11/12 rounded-full bg-orange-500",
+        "90%",
+        "text-sm text-orange-500"
+      );
+    } else {
+      changeProgressBar(
+        "This password is hard to crack!",
         "h-2.5 w-12/12 rounded-full bg-green-700",
         "100%",
         "text-sm text-green-700"
@@ -119,11 +126,11 @@ function SignupFunction({ appData }) {
       return;
     }
 
-    // makes sure that the password entered is strong enough
-    if (passwordScore < 3) {
-      changeAlert("Please make your password stronger");
-      return;
-    }
+    // // makes sure that the password entered is strong enough
+    // if (passwordScore < 3) {
+    //   changeAlert("Please make your password stronger");
+    //   return;
+    // }
 
     // makes post request for the signup api
     axios
