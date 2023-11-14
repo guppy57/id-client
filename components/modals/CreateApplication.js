@@ -336,9 +336,10 @@ export default function CreateApplicationModal({ state, setState }) {
                     id="basePermission"
                     name="basePermission"
                     className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    placeholder={"KREATIVE_DREAMER"}
+                    placeholder={"e.g   KREATIVE_DREAMER"}
+                    required
                     value={basePermission}
-                    onChange={(e) => basePermission(e.target.value)}
+                    onChange={(e) => setBasePermission(e.target.value)}
                   />
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-3 sm:gap-3">
