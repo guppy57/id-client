@@ -20,7 +20,7 @@ export default function AuthPage() {
     if (!key) return;
 
     // function that executes business logic for callback auth flow
-    const executeCallback = async () => {
+    const executeCallback = () => {
       // adds the cookie for the client side
       setCookie("kreative_id_key", key, {
         secure: true,
