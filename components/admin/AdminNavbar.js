@@ -25,7 +25,7 @@ export default function AdminNavbarComponent() {
     // closes the keychain using id-api
     axios
       .post(
-        `https://id-api.kreativeusa.com/v1/keychains/${cookies["keychain_id"]}/close`,
+        `https://id-api.kreativeusa.com/v1/keychains/${cookies.keychain_id}/close`,
         {
           aidn: parseInt(AIDN),
           appchain: APPCHAIN,
@@ -49,7 +49,7 @@ export default function AdminNavbarComponent() {
         // gets the status code of the error through the response
         // we check to see if the status code exists as to not throw an error in case an error is thrown
         // that isn't actually sent by the server api, but rather from axios
-        let statusCode;
+        let statusCode = 0;
 
         if (error.response.data.statusCode === undefined) {
           statusCode = error.response.data.statusCode;

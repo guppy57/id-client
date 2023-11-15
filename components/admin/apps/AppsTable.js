@@ -11,7 +11,7 @@ export default function AppsTableComponent() {
     queryKey: ["apps"],
     queryFn: async () => {
       // create empty response variable
-      let response;
+      let response = 0;
 
       try {
         // with this axios request, we need to set the proper headers for the server-side authentication
@@ -20,7 +20,7 @@ export default function AppsTableComponent() {
           "https://id-api.kreativeusa.com/v1/applications",
           {
             headers: {
-              KREATIVE_ID_KEY: cookies["kreative_id_key"],
+              KREATIVE_ID_KEY: cookies.kreative_id_key,
               KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
               KREATIVE_APPCHAIN: process.env.NEXT_PUBLIC_APPCHAIN,
             },

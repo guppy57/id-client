@@ -47,12 +47,12 @@ function SignupFunction({ appData }) {
     setAlertStyles("");
   };
 
-  const changeProgressBar = (message, progressClass, widthName, textClass) => {
+  const changeProgressBar = (message, progressClassProps, widthName, textClassProps) => {
     // sets the state for the different variables for the progress bar
     setBarMessage(message);
-    setProgressClass(progressClass);
+    setProgressClass(progressClassProps);
     setBarWidthName(widthName);
-    setTextClass(textClass);
+    setTextClass(textClassProps);
   };
 
   const handlePasswordInput = (passwordInput) => {

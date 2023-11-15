@@ -74,7 +74,7 @@ export default function AuthenticateComponent({ children, permissions }) {
             window.location.href = `/signin?aidn=${AIDN}&message=${error.message}`;
           })
           .json((response) => {
-            const account = response.data.account;
+            const responseAccount = response.data.account;
             const keychain = response.data.keychain;
             const userPermissions = account.permissions;
 
@@ -101,7 +101,7 @@ export default function AuthenticateComponent({ children, permissions }) {
               });
 
               // we set the account data in the global state so that the application can access it anywhere
-              setAccount(account);
+              setAccount(responseAccount);
 
               // once all operations are completed, we set authenticated to true
               setAuthenticated(true);
