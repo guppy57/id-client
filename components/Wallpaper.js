@@ -10,6 +10,6 @@ export default function WallpaperComponent() {
         alt="Space image Wallpaper for Kreative ID"
         fill="fill"
       />
-    <div/>
+    </div>
   );
 }
