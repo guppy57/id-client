@@ -445,25 +445,20 @@ export default function ForgotPasswordComponent() {
 
     if (!aidn) return;
 
-    const setAppVariables = async () => {
-      axios
-        .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}`)
-        .then((response) => {
-          setAppData({
-            aidn: response.data.data.application.aidn,
-            name: response.data.data.application.name,
-            callbackUrl: response.data.data.application.callbackUrl,
-          });
-          return () => (mounted = false);
-        })
-        .catch((error) => {
-          // unknown error
-          console.log(error);
+    axios
+      .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}`)
+      .then((response) => {
+        setAppData({
+          aidn: response.data.data.application.aidn,
+          name: response.data.data.application.name,
+          callbackUrl: response.data.data.application.callbackUrl,
         });
-    };
-
-    // sets variables from applications api
-    setAppVariables();
+        return () => (mounted = false);
+      })
+      .catch((error) => {
+        // unknown error
+        console.log(error);
+      });
   }, [aidn]);
 
   return <div>{appData && <ForgotPasswordFunction appData={appData} />}</div>;

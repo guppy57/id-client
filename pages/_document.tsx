@@ -1,4 +1,4 @@
-const newrelic = require("newrelic");
+const newrelic = require("newrelic"); // skipcq
 import Document, {
   Html,
   Head,
