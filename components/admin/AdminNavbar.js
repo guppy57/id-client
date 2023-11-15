@@ -25,7 +25,7 @@ export default function AdminNavbarComponent() {
     // closes the keychain using id-api
     axios
       .post(
-        `https://id-api.kreativeusa.com/v1/keychains/${cookies["keychain_id"]}/close`,
+        `https://id-api.kreativeusa.com/v1/keychains/${cookies.keychain_id}/close`,
         {
           aidn: parseInt(AIDN),
           appchain: APPCHAIN,

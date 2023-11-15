@@ -74,7 +74,7 @@ export default function EditApplicationModal({ state, setState }) {
           },
           {
             headers: {
-              KREATIVE_ID_KEY: cookies["kreative_id_key"],
+              KREATIVE_ID_KEY: cookies.kreative_id_key,
               KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
               KREATIVE_APPCHAIN: process.env.NEXT_PUBLIC_APPCHAIN,
             },
@@ -171,7 +171,7 @@ export default function EditApplicationModal({ state, setState }) {
       try {
         response = await axios.delete(url, {
           headers: {
-            KREATIVE_ID_KEY: cookies["kreative_id_key"],
+            KREATIVE_ID_KEY: cookies.kreative_id_key,
             KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
             KREATIVE_APPCHAIN: process.env.NEXT_PUBLIC_APPCHAIN,
           },
