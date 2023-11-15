@@ -81,7 +81,7 @@ export default function AdminNavbarComponent() {
   };
 
   return (
-    <>
+    <div>
       <div className="md:flex md:items-center md:justify-between">
         <div className="min-w-0 flex-1">
           <Link href="/admin/apps">
@@ -124,6 +124,6 @@ export default function AdminNavbarComponent() {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

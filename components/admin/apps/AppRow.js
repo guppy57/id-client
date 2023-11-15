@@ -45,7 +45,7 @@ export default function AppRowComponent({
   };
 
   return (
-    <>
+    <div>
       <tr key={aidn}>
         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
           {aidn}
@@ -81,6 +81,6 @@ export default function AppRowComponent({
           </span>
         </td>
       </tr>
-    </>
+    </div>
   );
 }
