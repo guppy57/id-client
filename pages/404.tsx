@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NotFoundPage() {
   return (
@@ -18,10 +19,12 @@ export default function NotFoundPage() {
           <div className="flex flex-shrink-0 justify-center">
             <Link href="/" className="inline-flex">
               <span className="sr-only">Kreative ID</span>
-              <img
+              <Image
                 className="h-10 w-auto"
                 src="https://cdn.kreativeusa.com/id/kreative-id.png"
                 alt=""
+                width={120}
+                height={40}
               />
             </Link>
           </div>
