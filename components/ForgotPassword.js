@@ -437,6 +437,7 @@ function ForgotPasswordFunction({ appData }) {
 }
 
 export default function ForgotPasswordComponent() {
+  const router = useRouter();
   const { aidn } = router.query;
   const [appData, setAppData] = useState();
 
