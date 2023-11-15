@@ -235,7 +235,7 @@ function ForgotPasswordFunction({ appData }) {
         .then((response) => {
           setFormStyles("hidden");
           setGoBackStyles("mt-8");
-          setTitle('You're all set to sign in');
+          setTitle("You're all set to sign in");
           setSubtitle(`Sign in and continue to ${appData.name}`);
         })
         .catch((error) => {
