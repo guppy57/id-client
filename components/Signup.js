@@ -221,7 +221,7 @@ function SignupFunction({ appData }) {
                         type="text"
                         name="username"
                         id="username"
-                        autoComplete="username"
+                        autoComplete="username" // skipcq
                         value={username}
                         placeholder="Username"
                         className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"

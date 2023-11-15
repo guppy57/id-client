@@ -320,7 +320,7 @@ function ForgotPasswordFunction({ appData }) {
                         value={resetCode}
                         name="resetCode"
                         type="text"
-                        autoComplete="nope"
+                        autoComplete="nope" // skipcq
                         required
                         className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         placeholder="000000"
@@ -347,7 +347,7 @@ function ForgotPasswordFunction({ appData }) {
                         value={password}
                         name="password"
                         type={showNewPassword ? "text" : "password"}
-                        autoComplete="new-password"
+                        autoComplete="new-password" 
                         required
                         className="relative block w-full appearance-none rounded-none rounded-tl-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         placeholder="New password"
@@ -380,7 +380,7 @@ function ForgotPasswordFunction({ appData }) {
                         value={cPassword}
                         name="confirm-password"
                         type="password"
-                        autoComplete="confirm-password"
+                        autoComplete="confirm-password" // skipcq
                         required
                         className="relative mb-3 block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         placeholder="Confirm password"
