@@ -40,7 +40,6 @@ export default function AdminNavbarComponent() {
         setAccount({});
 
         // redirects the user to the logout confirmation page
-        // TODO: make a better logout confirmation page
         window.location.href = "/logged-out";
       })
       .catch((error) => {
