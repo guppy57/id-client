@@ -1,3 +1,4 @@
+// skipcq: JS-0424
 import { useAtom } from "jotai";
 import { useRouter } from "next/router";
 import { editAppModalStore } from "../../../stores/editAppModalStore";

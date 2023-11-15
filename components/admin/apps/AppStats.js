@@ -1,5 +1,5 @@
 export default function AppStats({ stats }) {
-  const mappedStats = stats.map((stat) => {
+  stats.forEach((stat) => {
     const name = stat.name;
     const words = name.split(" ");
     stat.keyword = words[words.length - 1];
@@ -11,7 +11,7 @@ export default function AppStats({ stats }) {
         Application Analytics
       </h3>
       <dl className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-        {mappedStats.map((item) => (
+        {stats.map((item) => (
           <div
             key={item.name}
             className="overflow-hidden rounded-lg border-2 border-gray-100 bg-white px-4 py-5 sm:p-6"
