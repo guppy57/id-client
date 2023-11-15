@@ -1,11 +1,8 @@
-const newrelic = require("newrelic"); // skipcq
 import Document, {
   Html,
   Head,
   Main,
   NextScript,
-  DocumentContext,
-  DocumentInitialProps,
 } from "next/document";
 import Script from "next/script";
 
@@ -13,21 +10,6 @@ import Script from "next/script";
 const GTM_ID = "'GTM-PT3MDZ4'";
 
 class MyDocument extends Document {
-  static async getInitialProps(
-    ctx: DocumentContext
-  ): Promise<DocumentInitialProps & { browserTimingHeader: string }> {
-    const initialProps = await Document.getInitialProps(ctx);
-
-    const browserTimingHeader = newrelic.getBrowserTimingHeader({
-      hasToRemoveScriptWrapper: true,
-    });
-
-    return {
-      ...initialProps,
-      browserTimingHeader,
-    };
-  }
-
   render() {
     return (
       <Html lang="en" className="min-h-screen bg-white">
