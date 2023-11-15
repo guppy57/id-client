@@ -75,14 +75,14 @@ function SignupFunction({ appData }) {
         "20%",
         "text-sm text-red-600"
       );
-    } else if (1 === passwordScore) {
+    } else if (passwordScore === 1) {
       changeProgressBar(
         "Password is good",
         "h-2.5 w-8/12 rounded-full bg-yellow-500",
         "75%",
         "text-sm text-yellow-500"
       );
-    } else if (2 === passwordScore || 3 === passwordScore) {
+    } else if (passwordScore === 2 || passwordScore === 3) {
       changeProgressBar(
         "Password is getting stronger",
         "h-2.5 w-11/12 rounded-full bg-orange-500",
@@ -373,7 +373,6 @@ export default function SignupComponent() {
     // ensures nothing happens unless aidn is defined
     if (!aidn) return;
 
-    console.log("running");
     const setAppVariables = async () => {
       axios
         .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}`)

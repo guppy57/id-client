@@ -7,7 +7,7 @@ export default function ProgressBarComponent({
   return (
     <>
       <div className="h-2.5 w-full rounded-full bg-gray-200">
-        <div className={progressClass}></div>
+        <div className={progressClass}/>
       </div>
       <div className="mb-1 flex justify-between">
         <p className={textClass}>{message}</p>

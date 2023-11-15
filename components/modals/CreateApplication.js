@@ -55,7 +55,6 @@ export default function CreateApplicationModal({ state, setState }) {
         );
       } catch (error) {
         // some sort of error happened
-        console.log(error);
         throw new Error(error.message);
       }
 

@@ -80,14 +80,14 @@ function ForgotPasswordFunction({ appData }) {
         "20%",
         "text-sm text-red-600"
       );
-    } else if (1 === passwordScore) {
+    } else if (passwordScore === 1) {
       changeProgressBar(
         "Password is good",
         "h-2.5 w-8/12 rounded-full bg-yellow-500",
         "75%",
         "text-sm text-yellow-500"
       );
-    } else if (2 === passwordScore || 3 === passwordScore) {
+    } else if (passwordScore === 2|| passwordScore === 3) {
       changeProgressBar(
         "Password is getting stronger",
         "h-2.5 w-11/12 rounded-full bg-orange-500",
@@ -131,7 +131,7 @@ function ForgotPasswordFunction({ appData }) {
         setFindAccountStyles("hidden");
         setVerifyCodeStyles("-space-y-px rounded-md shadow-sm");
         setKsn(response.data.data.accountChange.ksn);
-        setTitle(`Verify your reset code`);
+        setTitle('Verify your reset code');
         setSubtitle(
           `We sent a six-digit reset code to your email at ${email}. Enter it below to continue.`
         );
@@ -177,7 +177,7 @@ function ForgotPasswordFunction({ appData }) {
       .then((response) => {
         setVerifyCodeStyles("hidden");
         setNewPasswordStyles("-space-y-px rounded-md shadow-sm");
-        setTitle(`Create your new password`);
+        setTitle('Create your new password');
         setSubtitle(`And continue your experience at ${appData.name}`);
       })
       .catch((error) => {
@@ -229,7 +229,7 @@ function ForgotPasswordFunction({ appData }) {
         .then((response) => {
           setFormStyles("hidden");
           setGoBackStyles("mt-8");
-          setTitle(`You're all set to sign in`);
+          setTitle('You're all set to sign in');
           setSubtitle(`Sign in and continue to ${appData.name}`);
         })
         .catch((error) => {
