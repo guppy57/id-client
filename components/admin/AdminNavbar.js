@@ -29,7 +29,7 @@ export default function AdminNavbarComponent() {
         {
           aidn: parseInt(AIDN),
           appchain: APPCHAIN,
-        }
+        },
       )
       .then((response) => {
         // deletes all cookies stored in local storage
