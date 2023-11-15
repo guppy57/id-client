@@ -15,7 +15,7 @@ export default function ErrorComponent({ cause, aidn }) {
     queryKey: ["errorApplication"],
     queryFn: async () => {
       // empty response variable to store api response
-      let response = 0;
+      let response;
 
       try {
         // gets non verbose application information based on the aidn

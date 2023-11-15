@@ -57,7 +57,7 @@ export default function EditApplicationModal({ state, setState }) {
   // updates the application details
   const editAppMutation = useMutation({
     mutationFn: async (url) => {
-      let response = 0;
+      let response;
 
       try {
         response = await axios.post(
@@ -74,7 +74,7 @@ export default function EditApplicationModal({ state, setState }) {
           },
           {
             headers: {
-              KREATIVE_ID_KEY: cookies.kreative_id_key,
+              KREATIVE_ID_KEY: cookies["kreative_id_key"],
               KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
               KREATIVE_APPCHAIN: process.env.NEXT_PUBLIC_APPCHAIN,
             },
@@ -166,12 +166,12 @@ export default function EditApplicationModal({ state, setState }) {
   // deletes the application from the database
   const deleteAppMutation = useMutation({
     mutationFn: async (url) => {
-      let response = 0;
+      let response;
 
       try {
         response = await axios.delete(url, {
           headers: {
-            KREATIVE_ID_KEY: cookies.kreative_id_key,
+            KREATIVE_ID_KEY: cookies["kreative_id_key"],
             KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
             KREATIVE_APPCHAIN: process.env.NEXT_PUBLIC_APPCHAIN,
           },

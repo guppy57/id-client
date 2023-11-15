@@ -47,7 +47,7 @@ export default function SingleApp({ aidn }) {
     queryKey: ["application", aidn],
     queryFn: async () => {
       // creates an empty response variable
-      let response = 0;
+      let response;
 
       // doesn't run the query if there is no aidn
       // without this, there will be a failed axios request (400) because the query tries

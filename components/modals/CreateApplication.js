@@ -13,7 +13,7 @@ export default function CreateApplicationModal({ state, setState }) {
 
   // state variables for creating a new application in the modal
   const [appName, setAppName] = useState("");
-  const [callbackUrl, setCallbackUrl] = useState("");
+  const [callback, setCallback] = useState("");
   const [homepage, setHomepage] = useState("");
   const [description, setDescription] = useState("");
   const [logoUrl, setLogoUrl] = useState("");
@@ -30,14 +30,14 @@ export default function CreateApplicationModal({ state, setState }) {
   };
 
   const appsMutation = useMutation({
-    mutationFn: async (givenCallbackUrl) => {
-      let response = 0;
+    mutationFn: async (callback) => {
+      let response;
 
       try {
         response = await axios.post(
           "https://id-api.kreativeusa.com/v1/applications",
           {
-            callbackUrl: givenCallbackUrl,
+            callbackUrl: callback,
             name: appName,
             description,
             homepage,
@@ -47,7 +47,7 @@ export default function CreateApplicationModal({ state, setState }) {
           },
           {
             headers: {
-              KREATIVE_ID_KEY: cookies.kreative_id_key,
+              KREATIVE_ID_KEY: cookies["kreative_id_key"],
               KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
               KREATIVE_APPCHAIN: process.env.NEXT_PUBLIC_APPCHAIN,
             },
@@ -99,7 +99,7 @@ export default function CreateApplicationModal({ state, setState }) {
     // logoUrl and iconUrl are not required so they will not be checked
     if (
       appName === "" ||
-      callbackUrl === "" ||
+      callback === "" ||
       homepage === "" ||
       description === "" ||
       basePermission === ""
@@ -126,7 +126,7 @@ export default function CreateApplicationModal({ state, setState }) {
     }
 
     // add 'https://' to the callback string that was entered
-    const newCallback = `https://${callbackUrl}`;
+    const newCallback = `https://${callback}`;
 
     // calls the mutation to create a new application
     appsMutation.mutate(newCallback);
@@ -250,8 +250,8 @@ export default function CreateApplicationModal({ state, setState }) {
                             className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             placeholder="kreativeusa.com"
                             required
-                            value={callbackUrl}
-                            onChange={(e) => setCallbackUrl(e.target.value)}
+                            value={callback}
+                            onChange={(e) => setCallback(e.target.value)}
                           />
                         </div>
                       </div>
