@@ -129,13 +129,15 @@ function ForgotPasswordFunction({ appData }) {
         email: email.toLowerCase(),
       })
       .then((response) => {
-        setFindAccountStyles("hidden");
-        setVerifyCodeStyles("-space-y-px rounded-md shadow-sm");
-        setKsn(response.data.data.accountChange.ksn);
-        setTitle('Verify your reset code');
-        setSubtitle(
-          `We sent a six-digit reset code to your email at ${email}. Enter it below to continue.`
-        );
+        if (response.status >= 200 && response.status <= 299) {
+          setFindAccountStyles("hidden");
+          setVerifyCodeStyles("-space-y-px rounded-md shadow-sm");
+          setKsn(response.data.data.accountChange.ksn);
+          setTitle('Verify your reset code');
+          setSubtitle(
+            `We sent a six-digit reset code to your email at ${email}. Enter it below to continue.`
+          );
+        }
       })
       .catch((error) => {
         // sets and finds the statuscode from the error object
@@ -176,10 +178,12 @@ function ForgotPasswordFunction({ appData }) {
         }
       )
       .then((response) => {
-        setVerifyCodeStyles("hidden");
-        setNewPasswordStyles("-space-y-px rounded-md shadow-sm");
-        setTitle('Create your new password');
-        setSubtitle(`And continue your experience at ${appData.name}`);
+        if (response.status >= 200 && response.status <= 299) {
+          setVerifyCodeStyles("hidden");
+          setNewPasswordStyles("-space-y-px rounded-md shadow-sm");
+          setTitle('Create your new password');
+          setSubtitle(`And continue your experience at ${appData.name}`);
+        }
       })
       .catch((error) => {
         // sets and finds the statuscode from the error object

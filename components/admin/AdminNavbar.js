@@ -32,15 +32,18 @@ export default function AdminNavbarComponent() {
         }
       )
       .then((response) => {
-        // deletes all cookies stored in local storage
-        removeCookie("kreative_id_key", { path: "/" });
-        removeCookie("keychain_id", { path: "/" });
+        // check if response is between 200 and 299
+        if (response.status >= 200 && response.status <= 299) {
+          // deletes all cookies stored in local storage
+          removeCookie("kreative_id_key", { path: "/" });
+          removeCookie("keychain_id", { path: "/" });
 
-        // resets the global account data store
-        setAccount({});
+          // resets the global account data store
+          setAccount({});
 
-        // redirects the user to the logout confirmation page
-        window.location.href = "/logged-out";
+          // redirects the user to the logout confirmation page
+          window.location.href = "/logged-out";
+        }
       })
       .catch((error) => {
         // error response status code is above 300+
