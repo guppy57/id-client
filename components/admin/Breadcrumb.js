@@ -4,7 +4,7 @@ import { HomeIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 export default function Breadcrumb({ pages }) {
   return (
     <nav className="flex pt-8 pb-8" aria-label="Breadcrumb">
-      <ol role="list" className="flex items-center space-x-4">
+      <ol className="flex items-center space-x-4">
         <li>
           <div>
             <Link href="/admin" className="text-gray-400 hover:text-gray-500">
