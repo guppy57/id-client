@@ -19,21 +19,16 @@ export default function AuthPage() {
     // nothing happens unless the key query param loads
     if (!key) return;
 
-    // function that executes business logic for callback auth flow
-    const executeCallback = () => {
-      // adds the cookie for the client side
-      setCookie("kreative_id_key", key, {
-        secure: true,
-        sameSite: "strict",
-        path: "/",
-      });
-
-      // redirects to the admin page for authentication flow to continue
-      window.location.href = "/admin";
-    };
-
     // takes the given key and creates a new cookie, then redirects user to admin page
-    executeCallback();
+    // adds the cookie for the client side
+    setCookie("kreative_id_key", key, {
+      secure: true,
+      sameSite: "strict",
+      path: "/",
+    });
+
+    // redirects to the admin page for authentication flow to continue
+    window.location.href = "/admin";
   }, [key, setCookie]);
 
   return (
