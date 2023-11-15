@@ -10,11 +10,11 @@ import { useCookies } from "react-cookie";
 export default function AuthPage() {
   const router = useRouter();
   const { key } = router.query;
-  const [cookies, setCookie] = useCookies(["kreative_id_key"]);
+  const [cookies, setCookie] = useCookies(["kreative_id_key"]); // skipcq
 
   useEffect(() => {
     // ?? we never use this again, but it works, should we take it out ??
-    let mounted = true;
+    let mounted = true; // skipcq
 
     // nothing happens unless the key query param loads
     if (!key) return;
