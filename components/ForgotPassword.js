@@ -12,6 +12,7 @@ import Wallpaper from "./Wallpaper";
 import ProgressBarComponent from "./ProgressBar";
 
 function ForgotPasswordFunction({ appData }) {
+  const router = useRouter();
   // api data variables
   const [email, setEmail] = useState("");
   const [resetCode, setResetCode] = useState("");
@@ -183,6 +184,7 @@ function ForgotPasswordFunction({ appData }) {
       .catch((error) => {
         // sets and finds the statuscode from the error object
         const statusCode = error.response.data.statusCode;
+        const message = error.response.data.message ?? null;
 
         if (statusCode === 500 || statusCode === 400) {
           // 500: internal server error, 400: bad schema
@@ -431,7 +433,6 @@ function ForgotPasswordFunction({ appData }) {
 }
 
 export default function ForgotPasswordComponent() {
-  const router = useRouter();
   const { aidn } = router.query;
   const [appData, setAppData] = useState();
 
