@@ -29,7 +29,7 @@ export default function AdminNavbarComponent() {
         {
           aidn: parseInt(AIDN),
           appchain: APPCHAIN,
-        }
+        },
       )
       .then((response) => {
         // check if response is between 200 and 299
