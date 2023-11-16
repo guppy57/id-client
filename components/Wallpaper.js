@@ -6,7 +6,7 @@ export default function WallpaperComponent() {
     <div>
       <Image
         className="absolute inset-0 h-full w-full object-cover"
-        src="https://cdn.kreativeusa.com/id/space.jpg"
+        src="https://res.cloudinary.com/dlazo25rt/image/upload/v1700092790/kreative-id/space_lha0iq.jpg"
         alt="Space image Wallpaper for Kreative ID"
         fill="fill"
       />

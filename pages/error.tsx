@@ -19,7 +19,7 @@ export default function AdminPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="h-5/6 w-full">
-        <div >
+        <div>
           {cause && aidn && <ErrorComponent cause={cause} aidn={aidn} />}
         </div>
       </main>
@@ -34,7 +34,7 @@ export default function AdminPage() {
               className="h-6 w-auto"
               height={50}
               width={100}
-              src="https://cdn.kreativeusa.com/id/kreative-id-gray.png"
+              src="https://res.cloudinary.com/dlazo25rt/image/upload/v1700092787/kreative-id/Kreative_ID_Gray_ddzaur.png"
               alt="Kreative ID logo in gray"
             />
           </div>
