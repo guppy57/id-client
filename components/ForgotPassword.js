@@ -31,11 +31,11 @@ function ForgotPasswordFunction({ appData }) {
   // page element variables
   const [title, setTitle] = useState("Reset your password");
   const [subtitle, setSubtitle] = useState(
-    `for your account and continue to ${appData.name}`
+    `for your account and continue to ${appData.name}`,
   );
   const [formStyles, setFormStyles] = useState("mt-8");
   const [findAccountStyles, setFindAccountStyles] = useState(
-    "-space-y-px rounded-md shadow-sm"
+    "-space-y-px rounded-md shadow-sm",
   );
   const [verifyCodeStyles, setVerifyCodeStyles] = useState("hidden");
   const [newPasswordStyles, setNewPasswordStyles] = useState("hidden");
@@ -79,28 +79,28 @@ function ForgotPasswordFunction({ appData }) {
         "Password is weak",
         "h-2.5 w-4/12 rounded-full bg-red-600",
         "20%",
-        "text-sm text-red-600"
+        "text-sm text-red-600",
       );
     } else if (passwordScore === 1) {
       changeProgressBar(
         "Password is good",
         "h-2.5 w-8/12 rounded-full bg-yellow-500",
         "75%",
-        "text-sm text-yellow-500"
+        "text-sm text-yellow-500",
       );
-    } else if (passwordScore === 2|| passwordScore === 3) {
+    } else if (passwordScore === 2 || passwordScore === 3) {
       changeProgressBar(
         "Password is getting stronger",
         "h-2.5 w-11/12 rounded-full bg-orange-500",
         "90%",
-        "text-sm text-orange-500"
+        "text-sm text-orange-500",
       );
     } else {
       changeProgressBar(
         "This password is hard to crack!",
         "h-2.5 w-12/12 rounded-full bg-green-700",
         "100%",
-        "text-sm text-green-700"
+        "text-sm text-green-700",
       );
     }
   };
@@ -133,9 +133,9 @@ function ForgotPasswordFunction({ appData }) {
           setFindAccountStyles("hidden");
           setVerifyCodeStyles("-space-y-px rounded-md shadow-sm");
           setKsn(response.data.data.accountChange.ksn);
-          setTitle('Verify your reset code');
+          setTitle("Verify your reset code");
           setSubtitle(
-            `We sent a six-digit reset code to your email at ${email}. Enter it below to continue.`
+            `We sent a six-digit reset code to your email at ${email}. Enter it below to continue.`,
           );
         }
       })
@@ -175,13 +175,13 @@ function ForgotPasswordFunction({ appData }) {
         `https://id-api.kreativeusa.com/v1/accounts/${ksn}/resetCode/verify`,
         {
           resetCode: parseInt(resetCode),
-        }
+        },
       )
       .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
           setVerifyCodeStyles("hidden");
           setNewPasswordStyles("-space-y-px rounded-md shadow-sm");
-          setTitle('Create your new password');
+          setTitle("Create your new password");
           setSubtitle(`And continue your experience at ${appData.name}`);
         }
       })
@@ -230,7 +230,7 @@ function ForgotPasswordFunction({ appData }) {
           `https://id-api.kreativeusa.com/v1/accounts/${ksn}/resetPassword`,
           {
             password,
-          }
+          },
         )
         .then((response) => {
           setFormStyles("hidden");
@@ -347,7 +347,7 @@ function ForgotPasswordFunction({ appData }) {
                         value={password}
                         name="password"
                         type={showNewPassword ? "text" : "password"}
-                        autoComplete="new-password" 
+                        autoComplete="new-password"
                         required
                         className="relative block w-full appearance-none rounded-none rounded-tl-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         placeholder="New password"
