@@ -20,7 +20,7 @@ export default function ErrorComponent({ cause, aidn }) {
       try {
         // gets non verbose application information based on the aidn
         response = await axios.get(
-          `https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`
+          `https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`,
         );
       } catch (error) {
         // some sort of error, statusCode is not between 200-299
@@ -33,7 +33,7 @@ export default function ErrorComponent({ cause, aidn }) {
     },
     onSuccess: (data) => {
       const words = data.name.split(" ");
-      
+
       if (words.length === 1) setInitiative(words[0].toLowerCase());
       else setInitiative(words[1].toLowerCase());
     },
@@ -48,28 +48,28 @@ export default function ErrorComponent({ cause, aidn }) {
     if (cause === "ise") {
       setTag("Internal Server Error");
       setMessage(
-        "Something went wrong with our server or website. Please try again soon, our team will be working to fix Kreative ID."
+        "Something went wrong with our server or website. Please try again soon, our team will be working to fix Kreative ID.",
       );
     } else if (cause === "permissions") {
       setTag("Inadequete Permissions");
       setTitle("Your account doesn't have access");
       setMessage(
-        "The resource you are trying to access requires permissions that your account doesn't have."
+        "The resource you are trying to access requires permissions that your account doesn't have.",
       );
     } else if (cause === "unknown") {
       setTag("Unknown Error");
       setMessage(
-        "Unfortunately, our system cannot identify the exact issue. Please try again soon."
+        "Unfortunately, our system cannot identify the exact issue. Please try again soon.",
       );
     } else if (cause === "badrequest") {
       setTag("Bad Request Error");
       setMessage(
-        "There has been an issue with our internal applications. Please try again soon."
+        "There has been an issue with our internal applications. Please try again soon.",
       );
     } else if (cause === "notfound") {
       setTag("Not Found Error");
       setMessage(
-        "The system we use to authenticate you and verify your account is using an invalid 'keychain'. Please try again soon."
+        "The system we use to authenticate you and verify your account is using an invalid 'keychain'. Please try again soon.",
       );
     }
   }, [cause, aidn]);
