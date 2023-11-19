@@ -20,7 +20,7 @@ export default function ErrorComponent({ cause, aidn }) {
       try {
         // gets non verbose application information based on the aidn
         response = await axios.get(
-          `https://id-api.kreativeusa.com/v1/applications/${aidn}`
+          `https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`
         );
       } catch (error) {
         // some sort of error, statusCode is not between 200-299
@@ -29,7 +29,7 @@ export default function ErrorComponent({ cause, aidn }) {
       }
 
       // returns the application object on the data.data key
-      return response.data.data.application;
+      return response.data.data;
     },
     onSuccess: (data) => {
       const words = data.name.split(" ");
@@ -140,6 +140,13 @@ export default function ErrorComponent({ cause, aidn }) {
                   </h1>
                   <p className="mt-2 text-lg text-gray-600">{message}</p>
                   <div className="mt-6">
+                    <Link
+                      href={errorAppQuery.data.homepage}
+                      className="text-base font-medium text-indigo-600 hover:text-indigo-500"
+                    >
+                      Go back to {errorAppQuery.data.name} homepage
+                      <span aria-hidden="true"> &rarr;</span>
+                    </Link>
                     <Link
                       href={errorAppQuery.data.homepage}
                       className="text-base font-medium text-indigo-600 hover:text-indigo-500"

@@ -272,9 +272,9 @@ export default function SigninComponent() {
       .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
       .then((response) => {
         setAppData({
-          aidn: response.data.data.application.aidn,
-          name: response.data.data.application.name,
-          callbackUrl: response.data.data.application.callbackUrl,
+          aidn: response.data.data.aidn,
+          name: response.data.data.name,
+          callbackUrl: response.data.data.callbackUrl,
         });
         return () => (mounted = false);
       })
