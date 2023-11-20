@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import zxcvbn from "zxcvbn";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
@@ -40,6 +40,7 @@ function SignupFunction({ appData }) {
   const [alertStyles, setAlertStyles] = useState("hidden");
   const [showPassword, setShowPassword] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [showUsernameHelpText, setShowUsernameHelpText] = useState(false);
 
   // regex expression for checking if a string is a valid email address
   const regexExp =
@@ -108,6 +109,14 @@ function SignupFunction({ appData }) {
 
     // removes any displayed alerts
     setAlertStyles("hidden");
+
+    // make sure username is only made up of letters, numbers, underscores, and periods
+    if (!/^[a-zA-Z0-9_.]*$/.test(username)) {
+      changeAlert(
+        "Username can only be made up of letters, numbers, underscores, and periods"
+      );
+      return;
+    }
 
     // verify that all the fields we want are not empty strings
     // if anyone of them are empty, error is shown
@@ -233,9 +242,25 @@ function SignupFunction({ appData }) {
                         placeholder="Username"
                         className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         onChange={(e) => setUsername(e.target.value)}
+                        onFocus={() => setShowUsernameHelpText(true)}
+                        onBlur={() => setShowUsernameHelpText(false)}
                         required
                       />
                     </div>
+                    <AnimatePresence>
+                      {showUsernameHelpText && (
+                        <motion.p
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.1 }}
+                          className="mt-1.5 text-[0.875rem] leading-[1rem] text-gray-500"
+                        >
+                          Usernames are case-insensitive and only contain letters,
+                          numbers, underscores, and periods.
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="-space-y-px rounded-md shadow-sm">
