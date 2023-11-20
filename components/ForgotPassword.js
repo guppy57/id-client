@@ -230,12 +230,6 @@ function ForgotPasswordFunction({ appData }) {
       return;
     }
 
-    // makes sure that the password is strong enough
-    if (passwordScore < 3) {
-      changeAlert("Please make your password stronger");
-      return;
-    }
-
     // verifys that the password and confirmed password are correct
     if (!(password === cPassword)) {
       changeAlert("Passwords do not match.");
