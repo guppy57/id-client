@@ -7,7 +7,7 @@ const AIDN = process.env.NEXT_PUBLIC_AIDN;
 const APPCHAIN = process.env.NEXT_PUBLIC_APPCHAIN;
 
 function useLogout() {
-  const [account, setAccount] = useAtom(accountStore); 
+  const [account, setAccount] = useAtom(accountStore);
   // gets the cookies from local storage
   const [cookies, setCookie, removeCookie] = useCookies([
     "kreative_id_key",
@@ -21,7 +21,7 @@ function useLogout() {
         {
           aidn: parseInt(AIDN!),
           appchain: APPCHAIN,
-        }
+        },
       )
       .then((response) => {
         // check if response is between 200 and 299
@@ -70,7 +70,7 @@ function useLogout() {
           window.location.href = `/error?cause=unknown&aidn=${AIDN}`;
         }
       });
-  }
+  };
 
   return { performLogout };
 }
