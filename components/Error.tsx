@@ -1,15 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
-import { XMarkIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import useLogout from "@/hooks/useLogout";
 
-export default function ErrorComponent({ cause, aidn }) {
+export default function ErrorComponent({ cause, aidn }: { cause: string, aidn: string }) {
   const [tag, setTag] = useState("");
   const [title, setTitle] = useState("We ran into an issue");
   const [message, setMessage] = useState("Something");
   const [initiative, setInitiative] = useState("id");
+  const { performLogout } = useLogout();
 
   const errorAppQuery = useQuery({
     queryKey: ["errorApplication"],
@@ -22,7 +23,7 @@ export default function ErrorComponent({ cause, aidn }) {
         response = await axios.get(
           `https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`
         );
-      } catch (error) {
+      } catch (error: any) {
         // some sort of error, statusCode is not between 200-299
         console.log(error.message);
         throw new Error(error);
@@ -33,12 +34,20 @@ export default function ErrorComponent({ cause, aidn }) {
     },
     onSuccess: (data) => {
       const words = data.name.split(" ");
-      
+
       if (words.length === 1) setInitiative(words[0].toLowerCase());
       else setInitiative(words[1].toLowerCase());
     },
     enabled: true,
   });
+
+  const handleLogout = (e: any) => {
+    // prevents default button click behavior
+    if (e) e.preventDefault();
+
+    // closes the keychain using id-api
+    performLogout();
+  };
 
   // handles setting the title and message based on the error cause
   useEffect(() => {
@@ -140,13 +149,15 @@ export default function ErrorComponent({ cause, aidn }) {
                   </h1>
                   <p className="mt-2 text-lg text-gray-600">{message}</p>
                   <div className="mt-6">
-                    <Link
-                      href={errorAppQuery.data.homepage}
-                      className="text-base font-medium text-indigo-600 hover:text-indigo-500"
+                    <button
+                      type="button"
+                      className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      onClick={(e) => handleLogout(e)}
                     >
-                      Go back to {errorAppQuery.data.name} homepage
-                      <span aria-hidden="true"> &rarr;</span>
-                    </Link>
+                      Logout & try a new account
+                    </button>
+                  </div>
+                  <div className="mt-2">
                     <Link
                       href={errorAppQuery.data.homepage}
                       className="text-base font-medium text-indigo-600 hover:text-indigo-500"
