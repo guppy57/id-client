@@ -19,3 +19,4 @@ interface IAccount {
 const accountStore = atom({} as IAccount);
 
 export { accountStore };
+export type { IAccount };
