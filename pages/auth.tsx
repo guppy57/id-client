@@ -13,23 +13,25 @@ export default function AuthPage() {
   const [cookies, setCookie] = useCookies(["kreative_id_key"]); // skipcq
 
   useEffect(() => {
-    // ?? we never use this again, but it works, should we take it out ??
+    // ?? we never use this again, but it works, should we take it out?
     let mounted = true; // skipcq
 
     // nothing happens unless the key query param loads
     if (!key) return;
-
     // takes the given key and creates a new cookie, then redirects user to admin page
     // adds the cookie for the client side
     setCookie("kreative_id_key", key, {
       secure: true,
       sameSite: "strict",
       path: "/",
+      //httpOnly: true,
     });
+
+    if (cookies.kreative_id_key) console.log("key cookie added");
 
     // redirects to the admin page for authentication flow to continue
     window.location.href = "/admin";
-  }, [key, setCookie]);
+  }, [key, setCookie, cookies]);
 
   return (
     <>

@@ -20,7 +20,9 @@ export default function AdminPage() {
       </Head>
       <main className="h-5/6 w-full">
         <div>
-          {cause && aidn && <ErrorComponent cause={cause} aidn={aidn} />}
+          {cause && aidn && (
+            <ErrorComponent cause={cause.toString()} aidn={aidn.toString()} />
+          )}
         </div>
       </main>
       <footer className="border-t border-gray-100 py-6 sm:py-10">
