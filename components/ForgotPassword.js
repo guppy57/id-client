@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import zxcvbn from "zxcvbn";
+import { motion } from "framer-motion";
 
 import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
@@ -43,6 +44,7 @@ function ForgotPasswordFunction({ appData }) {
   const [alertStyles, setAlertStyles] = useState("hidden");
   const [goBackStyles, setGoBackStyles] = useState("hidden");
   const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   // regex expression for checking if a string is a valid email address
   const regexExp =
@@ -123,6 +125,8 @@ function ForgotPasswordFunction({ appData }) {
       return;
     }
 
+    setShowSpinner(true);
+
     // makes post request to create a reset code
     axios
       .post("https://id-api.kreativeusa.com/v1/accounts/resetCode/send", {
@@ -130,6 +134,7 @@ function ForgotPasswordFunction({ appData }) {
       })
       .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
+          setShowSpinner(false);
           setFindAccountStyles("hidden");
           setVerifyCodeStyles("-space-y-px rounded-md shadow-sm");
           setKsn(response.data.data.accountChange.ksn);
@@ -140,6 +145,7 @@ function ForgotPasswordFunction({ appData }) {
         }
       })
       .catch((error) => {
+        setShowSpinner(false);
         // sets and finds the statuscode from the error object
         const statusCode = error.response.data.statusCode;
 
@@ -169,6 +175,8 @@ function ForgotPasswordFunction({ appData }) {
       return;
     }
 
+    setShowSpinner(true);
+
     // makes post request to create a reset code
     axios
       .post(
@@ -179,6 +187,7 @@ function ForgotPasswordFunction({ appData }) {
       )
       .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
+          setShowSpinner(false);
           setVerifyCodeStyles("hidden");
           setNewPasswordStyles("-space-y-px rounded-md shadow-sm");
           setTitle('Create your new password');
@@ -186,6 +195,7 @@ function ForgotPasswordFunction({ appData }) {
         }
       })
       .catch((error) => {
+        setShowSpinner(false);
         // sets and finds the statuscode from the error object
         const statusCode = error.response.data.statusCode;
         const message = error.response.data.message ?? null;
@@ -197,7 +207,7 @@ function ForgotPasswordFunction({ appData }) {
           } else {
             changeAlert("Internal server error. Try again soon.");
           }
-        } else if (statusCode === 403) {
+        } else if (statusCode === 403 || statusCode === 401) {
           // reset code that was given is incorrect
           changeAlert("Reset code given is incorrect, try again.");
         } else {
@@ -214,6 +224,12 @@ function ForgotPasswordFunction({ appData }) {
     // removes any displayed alerts
     setAlertStyles("hidden");
 
+    // makes sure that the password field is not empty
+    if (password === "") {
+      changeAlert("Please enter a new password");
+      return;
+    }
+
     // makes sure that the password is strong enough
     if (passwordScore < 3) {
       changeAlert("Please make your password stronger");
@@ -224,6 +240,7 @@ function ForgotPasswordFunction({ appData }) {
     if (!(password === cPassword)) {
       changeAlert("Passwords do not match.");
     } else {
+      setShowSpinner(true);
       // creates a new post request to reset an account password
       axios
         .post(
@@ -233,12 +250,14 @@ function ForgotPasswordFunction({ appData }) {
           }
         )
         .then((response) => {
+          setShowSpinner(false);
           setFormStyles("hidden");
           setGoBackStyles("mt-8");
           setTitle("You're all set to sign in");
           setSubtitle(`Sign in and continue to ${appData.name}`);
         })
         .catch((error) => {
+          setShowSpinner(false);
           // sets and finds the statuscode from error object
           const statusCode = error.response.data.statusCode;
 
@@ -306,7 +325,23 @@ function ForgotPasswordFunction({ appData }) {
                         onClick={(e) => findAccount(e)}
                         className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
-                        Reset password
+                        {showSpinner ? (
+                          <div className="flex items-center justify-center space-x-3">
+                            <span>Sending your code...</span>
+                            <motion.span
+                              className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
+                              animate={{ rotate: 360 }}
+                              transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                ease: "linear",
+                              }}
+                              role="status"
+                            />
+                          </div>
+                        ) : (
+                          "Reset password"
+                        )}
                       </button>
                     </div>
                   </div>
@@ -332,7 +367,23 @@ function ForgotPasswordFunction({ appData }) {
                         onClick={(e) => verifyCode(e)}
                         className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
-                        Verify reset code
+                        {showSpinner ? (
+                          <div className="flex items-center justify-center space-x-3">
+                            <span>Verifying...</span>
+                            <motion.span
+                              className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
+                              animate={{ rotate: 360 }}
+                              transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                ease: "linear",
+                              }}
+                              role="status"
+                            />
+                          </div>
+                        ) : (
+                          "Verify reset code"
+                        )}
                       </button>
                     </div>
                   </div>
@@ -347,7 +398,7 @@ function ForgotPasswordFunction({ appData }) {
                         value={password}
                         name="password"
                         type={showNewPassword ? "text" : "password"}
-                        autoComplete="new-password" 
+                        autoComplete="new-password"
                         required
                         className="relative block w-full appearance-none rounded-none rounded-tl-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         placeholder="New password"
@@ -400,7 +451,23 @@ function ForgotPasswordFunction({ appData }) {
                         onClick={(e) => createNewPassword(e)}
                         className="group relative mt-3 flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
-                        Set new password
+                        {showSpinner ? (
+                          <div className="flex items-center justify-center space-x-3">
+                            <span>Updating your password...</span>
+                            <motion.span
+                              className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
+                              animate={{ rotate: 360 }}
+                              transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                ease: "linear",
+                              }}
+                              role="status"
+                            />
+                          </div>
+                        ) : (
+                          "Set new password"
+                        )}
                       </button>
                     </div>
                   </div>

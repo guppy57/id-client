@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import * as React from "react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
@@ -26,6 +27,7 @@ function SigninFunction({ appData }) {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertStyles, setAlertStyles] = useState("hidden");
   const [showPassword, setShowPassword] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
 
   // regex expression for checking if a string is a valid email address
   const regexExp =
@@ -64,6 +66,8 @@ function SigninFunction({ appData }) {
       return;
     }
 
+    setShowSpinner(true);
+
     // makes post request for the signin api
     axios
       .post("https://id-api.kreativeusa.com/v1/accounts/signin", {
@@ -74,6 +78,7 @@ function SigninFunction({ appData }) {
       })
       .then((response) => {
         // information passed
+        setShowSpinner(false);
         setFormStyles("hidden");
         setGoBackStyles("mt-8");
         setKey(response.data.data.keychain.key);
@@ -83,6 +88,7 @@ function SigninFunction({ appData }) {
         );
       })
       .catch((error) => {
+        setShowSpinner(false);
         // retrieves the statusCode from error object
         const statusCode = error.response.data.statusCode;
         // finds and sets the message from error object
@@ -223,7 +229,23 @@ function SigninFunction({ appData }) {
                       onClick={(e) => createSigninInstance(e)}
                       className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
-                      Sign in
+                      {showSpinner ? (
+                        <div className="flex items-center justify-center space-x-3">
+                          <span>Signing in...</span>
+                          <motion.span
+                            className="border-t-indigo-600 flex h-4 w-4 items-center rounded-full border-2 border-white"
+                            animate={{ rotate: 360 }}
+                            transition={{
+                              duration: 1,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
+                            role="status"
+                          />
+                        </div>
+                      ) : (
+                        "Sign in"
+                      )}
                     </button>
                   </div>
                 </form>

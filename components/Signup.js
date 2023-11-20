@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import zxcvbn from "zxcvbn";
+import { motion } from "framer-motion";
 
 import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
@@ -38,6 +39,8 @@ function SignupFunction({ appData }) {
   const [alertMessage, setAlertMessage] = useState("");
   const [alertStyles, setAlertStyles] = useState("hidden");
   const [showPassword, setShowPassword] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
+
   // regex expression for checking if a string is a valid email address
   const regexExp =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
@@ -132,6 +135,8 @@ function SignupFunction({ appData }) {
     //   return;
     // }
 
+    setShowSpinner(true);
+
     // makes post request for the signup api
     axios
       .post("https://id-api.kreativeusa.com/v1/accounts/signup", {
@@ -143,6 +148,7 @@ function SignupFunction({ appData }) {
         aidn: appData.aidn,
       })
       .then((response) => {
+        setShowSpinner(false);
         setFormStyles("hidden");
         setGoBackStyles("mt-8");
         setKey(response.data.data.keychain.key);
@@ -152,6 +158,7 @@ function SignupFunction({ appData }) {
         );
       })
       .catch((error) => {
+        setShowSpinner(false);
         // sets and finds the statuscode for the response
         const statusCode = error.response.data.statusCode;
         // finds and sets the message for the response
@@ -327,7 +334,23 @@ function SignupFunction({ appData }) {
                       onClick={(e) => createSignupInstance(e)}
                       className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
-                      Sign up
+                      {showSpinner ? (
+                        <div className="flex items-center justify-center space-x-3">
+                          <span>Signing you up...</span>
+                          <motion.span
+                            className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
+                            animate={{ rotate: 360 }}
+                            transition={{
+                              duration: 1,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
+                            role="status"
+                          />
+                        </div>
+                      ) : (
+                        "Sign up"
+                      )}
                     </button>
                   </div>
                 </form>
