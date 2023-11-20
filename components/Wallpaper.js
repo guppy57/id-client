@@ -1,7 +1,8 @@
-import React from "react";
-import Image from "next/image";
+import React, { use } from "react";
+import { useEffect, useState } from "react";
 
 export default function WallpaperComponent() {
+  const [gradient, setGradient] = useState("");
 
   const getRandomGradient = () => {
     const gradients = [
@@ -19,7 +20,17 @@ export default function WallpaperComponent() {
     return gradients[Math.floor(Math.random() * gradients.length)];
   }
 
+  useEffect(() => {
+    let mounted;
+
+    const randomGradient = getRandomGradient();
+    setGradient(randomGradient);
+    return () => {
+      return mounted = false;  
+    };
+  }, [setGradient]);
+
   return (
-    <div className={"absolute inset-0 h-full w-full " + getRandomGradient()} />
+    <div className={"absolute inset-0 h-full w-full " + gradient} />
   );
 }
