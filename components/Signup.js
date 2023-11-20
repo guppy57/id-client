@@ -212,10 +212,10 @@ function SignupFunction({ appData }) {
             <div>
               <Image
                 className="h-8 w-auto"
-                src="https://cdn.kreativeusa.com/id/kreative-id.png"
+                src="https://res.cloudinary.com/dlazo25rt/image/upload/v1700092604/kreative-id/kreative-id_zpbczr.png"
                 alt="Kreative ID logo in color"
-                height={1000}
-                width={100}
+                height={512}
+                width={136}
               />
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
                 {title}
@@ -256,8 +256,8 @@ function SignupFunction({ appData }) {
                           transition={{ duration: 0.1 }}
                           className="mt-1.5 text-[0.875rem] leading-[1rem] text-gray-500"
                         >
-                          Usernames are case-insensitive and only contain letters,
-                          numbers, underscores, and periods.
+                          Usernames are case-insensitive and only contain
+                          letters, numbers, underscores, and periods.
                         </motion.p>
                       )}
                     </AnimatePresence>

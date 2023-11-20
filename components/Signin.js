@@ -128,10 +128,10 @@ function SigninFunction({ appData }) {
             <div>
               <Image
                 className="h-8 w-auto"
-                src="https://cdn.kreativeusa.com/id/kreative-id.png"
+                src="https://res.cloudinary.com/dlazo25rt/image/upload/v1700092604/kreative-id/kreative-id_zpbczr.png"
                 alt="Kreative ID logo in color"
-                height={1000}
-                width={100}
+                height={512}
+                width={136}
               />
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
                 {title}
@@ -233,7 +233,7 @@ function SigninFunction({ appData }) {
                         <div className="flex items-center justify-center space-x-3">
                           <span>Signing in...</span>
                           <motion.span
-                            className="border-t-indigo-600 flex h-4 w-4 items-center rounded-full border-2 border-white"
+                            className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
                             animate={{ rotate: 360 }}
                             transition={{
                               duration: 1,
