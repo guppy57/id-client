@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 
 export default function WallpaperComponent() {
-
   const getRandomGradient = () => {
     const gradients = [
       "bg-gradient-to-r from-fuchsia-500 to-cyan-500",
@@ -17,7 +16,7 @@ export default function WallpaperComponent() {
     ];
 
     return gradients[Math.floor(Math.random() * gradients.length)];
-  }
+  };
 
   return (
     <div className={"absolute inset-0 h-full w-full " + getRandomGradient()} />
