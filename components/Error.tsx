@@ -41,14 +41,6 @@ export default function ErrorComponent({ cause, aidn }: { cause: string, aidn: s
     enabled: true,
   });
 
-  const handleLogout = (e: any) => {
-    // prevents default button click behavior
-    if (e) e.preventDefault();
-
-    // closes the keychain using id-api
-    performLogout();
-  };
-
   // handles setting the title and message based on the error cause
   useEffect(() => {
     // resets the default title message for the error component
@@ -149,13 +141,13 @@ export default function ErrorComponent({ cause, aidn }: { cause: string, aidn: s
                   </h1>
                   <p className="mt-2 text-lg text-gray-600">{message}</p>
                   <div className="mt-6">
-                    <button
-                      type="button"
-                      className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                      onClick={(e) => handleLogout(e)}
+                    <Link
+                      href={`/signin?aidn=${aidn}`}
+                      className="text-base font-medium text-indigo-600 hover:text-indigo-500"
                     >
-                      Logout & try a new account
-                    </button>
+                      Sign in with a different account
+                      <span aria-hidden="true"> &rarr;</span>
+                    </Link>
                   </div>
                   <div className="mt-2">
                     <Link
