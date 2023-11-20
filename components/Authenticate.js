@@ -32,6 +32,7 @@ export default function AuthenticateComponent({ children, permissions }) {
       // gets cookies on the client side, if none are found, return false
       if (cookies.kreative_id_key === undefined) {
         // takes the user to the sign in page since there is no key
+        console.log("no cookie found for key");
         window.location.href = `/signin?aidn=${AIDN}`;
       } else {
         // gets the key from cookie and parses it as a string for the POST request
@@ -77,7 +78,6 @@ export default function AuthenticateComponent({ children, permissions }) {
             const account = response.data.account;
             const keychain = response.data.keychain;
             const userPermissions = account.permissions;
-
             // checks if the user has the same permissions as required by the application
             // in other Kreative applications this will have to be manually configured based on number of permissions
             if (
@@ -117,7 +117,14 @@ export default function AuthenticateComponent({ children, permissions }) {
     };
 
     authenticate();
-  }, [cookies.keychain_id, cookies.kreative_id_key]);
+  }, [
+    cookies.keychain_id,
+    cookies.kreative_id_key,
+    permissions,
+    removeCookie,
+    setAccount,
+    setCookie,
+  ]);
 
   return <div>{authenticated && <div>{children}</div>}</div>;
 }
