@@ -7,8 +7,7 @@ import { accountStore } from "@/stores/accountStore";
 
 // the identifier for kreative id, either test or prod version
 const AIDN = process.env.NEXT_PUBLIC_AIDN;
-// the secret appchain for kreative id, production
-const APPCHAIN = process.env.NEXT_PUBLIC_APPCHAIN;
+
 
 // this component will serve as custom "middleware" to authenticate certain pages
 // essentially, it will take all page components as children
@@ -39,11 +38,10 @@ export default function AuthenticateComponent({ children, permissions }) {
         const keyFromCookie = cookies.kreative_id_key;
 
         // runs a verify keychain request on the API
-        wretch("https://id-api.kreativeusa.com/v1/keychains/verify")
+        wretch("/api/verify-keychain")
           .post({
             key: keyFromCookie,
             aidn: parseInt(AIDN),
-            appchain: APPCHAIN,
           })
           .unauthorized((error) => {
             // unauthorized exception, meaning that the keychain is expired
@@ -75,8 +73,8 @@ export default function AuthenticateComponent({ children, permissions }) {
             window.location.href = `/signin?aidn=${AIDN}&message=${error.message}`;
           })
           .json((response) => {
-            const account = response.data.account;
-            const keychain = response.data.keychain;
+            const account = response.account;
+            const keychain = response.keychain;
             const userPermissions = account.permissions;
             // checks if the user has the same permissions as required by the application
             // in other Kreative applications this will have to be manually configured based on number of permissions
