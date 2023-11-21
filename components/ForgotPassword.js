@@ -241,6 +241,7 @@ function ForgotPasswordFunction({ appData }) {
           `https://id-api.kreativeusa.com/v1/accounts/${ksn}/resetPassword`,
           {
             password,
+            resetCode: parseInt(resetCode),
           }
         )
         .then((response) => {
@@ -258,6 +259,9 @@ function ForgotPasswordFunction({ appData }) {
           if (statusCode === 500 || statusCode === 400) {
             // 500: internal server error, 400: bad schema
             changeAlert("Internal server error. Try again soon.");
+          } else if (statusCode === 401) {
+            // the reset code is incorrect
+            changeAlert("Uh oh, the reset code is incorrect. Please try again later.");
           } else {
             // some sort of unknown error on the client side
             console.log(error);
