@@ -182,7 +182,7 @@ function ForgotPasswordFunction({ appData }) {
       .post(
         `https://id-api.kreativeusa.com/v1/accounts/${ksn}/resetCode/verify`,
         {
-          resetCode: parseInt(resetCode),
+          code: parseInt(resetCode),
         }
       )
       .then((response) => {
