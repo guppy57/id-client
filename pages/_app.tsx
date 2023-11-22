@@ -9,36 +9,50 @@ import { Provider } from "jotai";
 // Create a client
 const queryClient = new QueryClient();
 
-// custom craftwork sans fonts loading locally
-const craftworkSans = localFont({
+const satoshi = localFont({
   src: [
     {
-      path: "../public/fonts/CraftworkSans-Regular.woff",
+      path: "../public/fonts/Satoshi/fonts/Satoshi-Regular.woff",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/CraftworkSans-Regular.woff2",
+      path: "../public/fonts/Satoshi/fonts/Satoshi-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/CraftworkSans-Regular.ttf",
+      path: "../public/fonts/Satoshi/fonts/Satoshi-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/CraftworkSans-Bold.woff",
+      path: "../public/fonts/Satoshi/fonts/Satoshi-Medium.woff",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Satoshi/fonts/Satoshi-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Satoshi/fonts/Satoshi-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Satoshi/fonts/Satoshi-Bold.woff",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../public/fonts/CraftworkSans-Bold.woff2",
+      path: "../public/fonts/Satoshi/fonts/Satoshi-Bold.woff2",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../public/fonts/CraftworkSans-Bold.ttf",
+      path: "../public/fonts/Satoshi/fonts/Satoshi-Bold.ttf",
       weight: "700",
       style: "normal",
     },
@@ -51,7 +65,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Provider>
         <CookiesProvider>
-          <div className={`${craftworkSans.variable} font-sans`}>
+          <div className={`${satoshi.variable} font-sans`}>
             <Component {...pageProps} />
           </div>
         </CookiesProvider>

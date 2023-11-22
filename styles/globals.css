@@ -4,19 +4,27 @@
 
 @layer base {
   @font-face {
-    font-family: CraftworkSans;
+    font-family: Satoshi;
     font-weight: normal;
-    src: url("/fonts/CraftworkSans-Regular.woff"),
-      url("/fonts/CraftworkSans-Regular.woff2"),
-      url("/fonts/CraftworkSans-Regular.ttf");
+    src: url("/fonts/Satoshi/fonts/Satoshi-Regular.woff"),
+      url("/fonts/Satoshi/fonts/Satoshi-Regular.woff2"),
+      url("/fonts/Satoshi/fonts/Satoshi-Regular.ttf"),
   }
 
   @font-face {
-    font-family: CraftworkSans;
+    font-family: Satoshi;
+    font-weight: 500;
+    src: url("/fonts/Satoshi/fonts/Satoshi-Medium.woff"),
+      url("/fonts/Satoshi/fonts/Satoshi-Medium.woff2"),
+      url("/fonts/Satoshi/fonts/Satoshi-Medium.ttf"),
+  }
+
+  @font-face {
+    font-family: Satoshi;
     font-weight: bold;
-    src: url("/fonts/CraftworkSans-Bold.woff"),
-      url("/fonts/CraftworkSans-Bold.woff2"),
-      url("/fonts/CraftworkSans-Bold.ttf");
+    src: url("/fonts/Satoshi/fonts/Satoshi-Bold.woff"),
+      url("/fonts/Satoshi/fonts/Satoshi-Bold.woff2"),
+      url("/fonts/Satoshi/fonts/Satoshi-Bold.ttf"),
   }
 
   html {
