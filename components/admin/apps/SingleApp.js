@@ -85,7 +85,7 @@ export default function SingleApp({ aidn }) {
         homepage: application.homepage,
         logoUrl: application.logoUrl,
         iconUrl: application.iconUrl,
-        basePermission: application.basePermission,
+        baseRole: application.baseRole,
       });
 
       // sends back the data from the response object
@@ -182,10 +182,10 @@ export default function SingleApp({ aidn }) {
                   </div>
                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">
                     <dt className="text-sm font-medium text-gray-500">
-                      Base Permission
+                      Base Role
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                      {appData.basePermission}
+                      {appData.baseRole}
                     </dd>
                   </div>
                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5 sm:px-6">

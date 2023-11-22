@@ -18,7 +18,7 @@ export default function CreateApplicationModal({ state, setState }) {
   const [description, setDescription] = useState("");
   const [logoUrl, setLogoUrl] = useState("");
   const [iconUrl, setIconUrl] = useState("");
-  const [basePermission, setBasePermission] = useState("");
+  const [baseRole, setBaseRole] = useState("");
 
   // alert message styles
   const [alertStyles, setAlertStyles] = useState("hidden");
@@ -43,7 +43,7 @@ export default function CreateApplicationModal({ state, setState }) {
             homepage,
             logoUrl,
             iconUrl,
-            basePermission,
+            baseRole,
           },
           {
             headers: {
@@ -80,7 +80,7 @@ export default function CreateApplicationModal({ state, setState }) {
       setHomepage("");
       setLogoUrl("");
       setIconUrl("");
-      setBasePermission("");
+      setBaseRole("");
 
       // we tell queryClient that the cached data we currently have is invalid
       // this will force a refetch that contains the newly created application
@@ -102,7 +102,7 @@ export default function CreateApplicationModal({ state, setState }) {
       callback === "" ||
       homepage === "" ||
       description === "" ||
-      basePermission === ""
+      baseRole === ""
     ) {
       setMessage("Please fill out all fields");
       setAlertStyles("");
@@ -325,20 +325,20 @@ export default function CreateApplicationModal({ state, setState }) {
                 </div>
                 <div className="pt-2 pb-2">
                   <label
-                    htmlFor="basePermission"
+                    htmlFor="baseRole"
                     className="block text-left text-sm font-medium text-gray-700"
                   >
-                    Base Permission
+                    Base Role
                   </label>
                   <input
                     type="text"
-                    id="basePermission"
-                    name="basePermission"
+                    id="baseRole"
+                    name="baseRole"
                     className="mt-1 block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     placeholder={"e.g   KREATIVE_DREAMER"}
                     required
-                    value={basePermission}
-                    onChange={(e) => setBasePermission(e.target.value)}
+                    value={baseRole}
+                    onChange={(e) => setBaseRole(e.target.value)}
                   />
                 </div>
                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-3 sm:gap-3">

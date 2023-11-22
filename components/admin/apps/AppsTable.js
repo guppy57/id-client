@@ -91,7 +91,7 @@ export default function AppsTableComponent() {
                         scope="col"
                         className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
                       >
-                        Base Permission
+                        Base Role
                       </th>
                       <th
                         scope="col"
@@ -113,7 +113,7 @@ export default function AppsTableComponent() {
                         description={app.description}
                         logoUrl={app.logoUrl}
                         iconUrl={app.iconUrl}
-                        basePermission={app.basePermission}
+                        baseRole={app.baseRole}
                       />
                     ))}
                   </tbody>
