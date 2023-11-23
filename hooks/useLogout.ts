@@ -3,9 +3,6 @@ import axios from "axios";
 import { useAtom } from "jotai";
 import { accountStore, IAccount } from "@/stores/accountStore";
 
-const AIDN = process.env.NEXT_PUBLIC_AIDN;
-const APPCHAIN = process.env.NEXT_PUBLIC_APPCHAIN;
-
 function useLogout() {
   const [account, setAccount] = useAtom(accountStore); 
   // gets the cookies from local storage
@@ -17,10 +14,9 @@ function useLogout() {
   const performLogout = async () => {
     axios
       .post(
-        `https://id-api.kreativeusa.com/v1/keychains/${cookies.keychain_id}/close`,
+        `https://id-api.kreativeusa.com/v1/keychains/close`,
         {
-          aidn: parseInt(AIDN!),
-          appchain: APPCHAIN,
+          key: cookies.keychain_id,
         }
       )
       .then((response) => {

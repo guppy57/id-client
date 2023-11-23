@@ -293,6 +293,7 @@ export default function SigninComponent() {
     axios
       .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
       .then((response) => {
+        console.log(response);
         setAppData({
           aidn: response.data.data.aidn,
           name: response.data.data.name,

@@ -62,7 +62,6 @@ export default function SingleApp({ aidn }) {
           {
             headers: {
               KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
-              KREATIVE_APPCHAIN: process.env.NEXT_PUBLIC_APPCHAIN,
             },
           }
         );
