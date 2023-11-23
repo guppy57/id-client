@@ -50,7 +50,7 @@ export default function CreateApplicationModal({ state, setState }) {
               KREATIVE_ID_KEY: cookies.kreative_id_key,
               KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
             },
-          }
+          },
         );
       } catch (error) {
         // some sort of error happened
@@ -64,7 +64,7 @@ export default function CreateApplicationModal({ state, setState }) {
       // handle any errors produced from the request
       console.log(error);
       setMessage(
-        `Internal server error occurred. Please try again later. ERROR: ${error.message}`
+        `Internal server error occurred. Please try again later. ERROR: ${error.message}`,
       );
       setAlertStyles("");
     },

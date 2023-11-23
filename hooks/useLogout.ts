@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import { accountStore, IAccount } from "@/stores/accountStore";
 
 function useLogout() {
-  const [account, setAccount] = useAtom(accountStore); 
+  const [account, setAccount] = useAtom(accountStore);
   // gets the cookies from local storage
   const [cookies, setCookie, removeCookie] = useCookies([
     "kreative_id_key",
@@ -13,12 +13,9 @@ function useLogout() {
 
   const performLogout = async () => {
     axios
-      .post(
-        `https://id-api.kreativeusa.com/v1/keychains/close`,
-        {
-          key: cookies.keychain_id,
-        }
-      )
+      .post(`https://id-api.kreativeusa.com/v1/keychains/close`, {
+        key: cookies.keychain_id,
+      })
       .then((response) => {
         // check if response is between 200 and 299
         if (response.status >= 200 && response.status <= 299) {
@@ -66,7 +63,7 @@ function useLogout() {
           window.location.href = `/error?cause=unknown&aidn=${AIDN}`;
         }
       });
-  }
+  };
 
   return { performLogout };
 }

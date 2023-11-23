@@ -63,7 +63,7 @@ export default function SingleApp({ aidn }) {
             headers: {
               KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
             },
-          }
+          },
         );
       } catch (error) {
         // some sort of error, statusCode is not between 200-299
@@ -192,9 +192,7 @@ export default function SingleApp({ aidn }) {
                       Brand assets
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                      <ul
-                        className="divide-y divide-gray-200 rounded-md border border-gray-200"
-                      >
+                      <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
                         <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                           <div className="flex w-0 flex-1 items-center">
                             <PaperClipIcon

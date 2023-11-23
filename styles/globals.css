@@ -8,7 +8,7 @@
     font-weight: normal;
     src: url("/fonts/Satoshi/fonts/Satoshi-Regular.woff"),
       url("/fonts/Satoshi/fonts/Satoshi-Regular.woff2"),
-      url("/fonts/Satoshi/fonts/Satoshi-Regular.ttf"),
+      url("/fonts/Satoshi/fonts/Satoshi-Regular.ttf");
   }
 
   @font-face {
@@ -16,7 +16,7 @@
     font-weight: 500;
     src: url("/fonts/Satoshi/fonts/Satoshi-Medium.woff"),
       url("/fonts/Satoshi/fonts/Satoshi-Medium.woff2"),
-      url("/fonts/Satoshi/fonts/Satoshi-Medium.ttf"),
+      url("/fonts/Satoshi/fonts/Satoshi-Medium.ttf");
   }
 
   @font-face {
@@ -24,7 +24,7 @@
     font-weight: bold;
     src: url("/fonts/Satoshi/fonts/Satoshi-Bold.woff"),
       url("/fonts/Satoshi/fonts/Satoshi-Bold.woff2"),
-      url("/fonts/Satoshi/fonts/Satoshi-Bold.ttf"),
+      url("/fonts/Satoshi/fonts/Satoshi-Bold.ttf");
   }
 
   html {
