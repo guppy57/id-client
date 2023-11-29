@@ -23,7 +23,7 @@ function useLogout() {
         // check if response is between 200 and 299
         if (response.status >= 200 && response.status <= 299) {
           // deletes all cookies stored in local storage
-          removeCookie("kreative_id_key", { path: "/" });
+          removeCookie("asd", { path: "/" });
           removeCookie("keychain_id", { path: "/" });
 
           // resets the global account data store
