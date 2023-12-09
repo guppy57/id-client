@@ -1,9 +1,4 @@
-import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-} from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import Script from "next/script";
 
 // id for Google Tag Manager container
@@ -29,7 +24,8 @@ class MyDocument extends Document {
           <NextScript />
           <noscript
             dangerouslySetInnerHTML={{
-              __html: '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PT3MDZ4" height="0" width="0" style="display:none;visibility:hidden" />',
+              __html:
+                '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PT3MDZ4" height="0" width="0" style="display:none;visibility:hidden" />',
             }}
           />
         </body>
