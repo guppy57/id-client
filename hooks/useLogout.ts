@@ -3,6 +3,8 @@ import axios from "axios";
 import { useAtom } from "jotai";
 import { accountStore, IAccount } from "@/stores/accountStore";
 
+const AIDN = process.env.NEXT_PUBLIC_AIDN;
+
 function useLogout() {
   const [account, setAccount] = useAtom(accountStore); 
   // gets the cookies from local storage
