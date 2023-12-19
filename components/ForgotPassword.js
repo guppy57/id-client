@@ -133,11 +133,12 @@ function ForgotPasswordFunction({ appData }) {
         email: email.toLowerCase(),
       })
       .then((response) => {
+        console.log(response);
         if (response.status >= 200 && response.status <= 299) {
           setShowSpinner(false);
           setFindAccountStyles("hidden");
           setVerifyCodeStyles("-space-y-px rounded-md shadow-sm");
-          setKsn(response.data.data.accountChange.ksn);
+          setKsn(response.data.data.ksn);
           setTitle('Verify your reset code');
           setSubtitle(
             `We sent a six-digit reset code to your email at ${email}. Enter it below to continue.`
@@ -145,6 +146,7 @@ function ForgotPasswordFunction({ appData }) {
         }
       })
       .catch((error) => {
+        console.log(error);
         setShowSpinner(false);
         // sets and finds the statuscode from the error object
         const statusCode = error.response.data.statusCode;
