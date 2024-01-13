@@ -5,9 +5,9 @@ import wretch from "wretch";
 const APPCHAIN = process.env.NEXT_PUBLIC_APPCHAIN;
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'POST') {
+  if (req.method !== "POST") {
     // handle error
-    return res.status(405).json({ message: 'Method not allowed' });
+    return res.status(405).json({ message: "Method not allowed" });
   }
 
   console.log("appchain: " + APPCHAIN);
@@ -48,5 +48,4 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       // some sort of unknown error, possibly on the client side itself
       return res.status(500).json({ message: error.message });
     });
-
 }
