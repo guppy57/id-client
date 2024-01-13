@@ -74,7 +74,7 @@ function useLogout() {
           window.location.href = `/error?cause=unknown&aidn=${AIDN}`;
         }
       });
-  }
+  };
 
   return { performLogout };
 }

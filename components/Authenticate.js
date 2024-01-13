@@ -8,7 +8,6 @@ import { accountStore } from "@/stores/accountStore";
 // the identifier for kreative id, either test or prod version
 const AIDN = process.env.NEXT_PUBLIC_AIDN;
 
-
 // this component will serve as custom "middleware" to authenticate certain pages
 // essentially, it will take all page components as children
 // the function will run the authentication, and once it has passed will display children
@@ -29,7 +28,7 @@ export default function AuthenticateComponent({ children, permissions }) {
   React.useEffect(() => {
     const authenticate = () => {
       console.log("authenticating");
-      console.log(cookies.kreative_id_key)
+      console.log(cookies.kreative_id_key);
       // gets cookies on the client side, if none are found, return false
       if (cookies.kreative_id_key === undefined) {
         // takes the user to the sign in page since there is no key
