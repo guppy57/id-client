@@ -57,7 +57,7 @@ const satoshi = localFont({
       style: "normal",
     },
   ],
-  variable: "--font-craftworksans",
+  variable: "--font-satoshi",
 });
 
 export default function App({ Component, pageProps }: AppProps) {
