@@ -1,5 +1,13 @@
 import { atom } from "jotai";
 
+interface IAccountRole {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  aidn: number;
+  description?: string;
+}
+
 interface IAccount {
   ksn: number;
   createdAt: Date;
@@ -13,7 +21,7 @@ interface IAccount {
   emailVerified: boolean;
   profilePicture: string;
   walletBalance: number;
-  permissions: string[];
+  roles: IAccountRole[];
 }
 
 const accountStore = atom({} as IAccount);
