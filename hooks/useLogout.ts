@@ -6,7 +6,7 @@ import { accountStore, IAccount } from "@/stores/accountStore";
 const AIDN = process.env.NEXT_PUBLIC_AIDN;
 
 function useLogout() {
-  const [account, setAccount] = useAtom(accountStore); 
+  const [account, setAccount] = useAtom(accountStore);
   // gets the cookies from local storage
   const [cookies, setCookie, removeCookie] = useCookies([
     "kreative_id_key",
@@ -18,8 +18,14 @@ function useLogout() {
       .post(
         `https://id-api.kreativeusa.com/v1/keychains/close`,
         {
-          key: cookies.keychain_id,
-        }
+          key: cookies.kreative_id_key,
+        },
+        {
+          headers: {
+            KREATIVE_ID_KEY: cookies.kreative_id_key,
+            KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
+          },
+        },
       )
       .then((response) => {
         // check if response is between 200 and 299

@@ -28,6 +28,8 @@ export default function AuthenticateComponent({ children, permissions }) {
   // the actual business logic occurs, as there needs to be an authenticated user
   React.useEffect(() => {
     const authenticate = () => {
+      console.log("authenticating");
+      console.log(cookies.kreative_id_key)
       // gets cookies on the client side, if none are found, return false
       if (cookies.kreative_id_key === undefined) {
         // takes the user to the sign in page since there is no key
@@ -36,6 +38,8 @@ export default function AuthenticateComponent({ children, permissions }) {
       } else {
         // gets the key from cookie and parses it as a string for the POST request
         const keyFromCookie = cookies.kreative_id_key;
+
+        console.log("cookie found for key");
 
         // runs a verify keychain request on the API
         wretch("https://id-api.kreativeusa.com/v1/keychains/verify")
@@ -63,6 +67,7 @@ export default function AuthenticateComponent({ children, permissions }) {
             // instead we will redirect the user to an auth error page
             removeCookie("kreative_id_key");
             removeCookie("keychain_id");
+            console.log(error);
             window.location.href = `/error?cause=ise&aidn=${AIDN}&message=${error.message}`;
           })
           .notFound((error) => {
@@ -73,17 +78,26 @@ export default function AuthenticateComponent({ children, permissions }) {
             window.location.href = `/signin?aidn=${AIDN}&message=${error.message}`;
           })
           .json((response) => {
-            const account = response.account;
-            const keychain = response.keychain;
-            const userPermissions = account.permissions;
+            console.log(response.data);
+            const account = response.data.account;
+            const keychain = response.data.keychain;
+            const userPermissions = account.roles;
             // checks if the user has the same permissions as required by the application
             // in other Kreative applications this will have to be manually configured based on number of permissions
-            if (
-              !(
-                userPermissions.includes(permissions[0]) ||
-                userPermissions.includes(permissions[1])
-              )
-            ) {
+
+            let authorized = false;
+
+            // this is ineffecient, but it works for now, as Kreative grows, this will have to be changed
+            for (let i = 0; i < userPermissions.length; i++) {
+              for (let j = 0; j < permissions.length; j++) {
+                if (userPermissions[i].rid === permissions[j]) {
+                  authorized = true;
+                  break;
+                }
+              }
+            }
+
+            if (!authorized) {
               // user does not have the correct permissions to continue
               // we can't just say the user isn't authenticated, because they are, they just don't have the correct permissions
               // FOR NOW we will handle the error by redirecting the user to the error page with a query param for the error
@@ -106,6 +120,7 @@ export default function AuthenticateComponent({ children, permissions }) {
             }
           })
           .catch((error) => {
+            console.log(error);
             // some sort of unknown error, possibly on the client side itself
             removeCookie("kreative_id_key");
             removeCookie("keychain_id");
@@ -115,14 +130,7 @@ export default function AuthenticateComponent({ children, permissions }) {
     };
 
     authenticate();
-  }, [
-    cookies.keychain_id,
-    cookies.kreative_id_key,
-    permissions,
-    removeCookie,
-    setAccount,
-    setCookie,
-  ]);
+  }, []);
 
   return <div>{authenticated && <div>{children}</div>}</div>;
 }
