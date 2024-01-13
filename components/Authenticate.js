@@ -38,7 +38,7 @@ export default function AuthenticateComponent({ children, permissions }) {
         const keyFromCookie = cookies.kreative_id_key;
 
         // runs a verify keychain request on the API
-        wretch("https://id-api.kreativeusa.com/v1/verify-keychain")
+        wretch("https://id-api.kreativeusa.com/v1/keychain/verify")
           .post({
             key: keyFromCookie,
             aidn: parseInt(AIDN),

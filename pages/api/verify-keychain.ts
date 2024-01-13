@@ -10,6 +10,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
+  console.log("appchain: " + APPCHAIN);
+
   wretch("https://id-api.kreativeusa.com/v1/keychains/verify")
     .post({
       key: req.body.key,
