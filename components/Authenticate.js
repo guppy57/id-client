@@ -8,7 +8,6 @@ import { accountStore } from "@/stores/accountStore";
 // the identifier for kreative id, either test or prod version
 const AIDN = process.env.NEXT_PUBLIC_AIDN;
 
-
 // this component will serve as custom "middleware" to authenticate certain pages
 // essentially, it will take all page components as children
 // the function will run the authentication, and once it has passed will display children
