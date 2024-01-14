@@ -77,7 +77,6 @@ export default function SingleApp({ aidn }) {
       // sets the global app data to the returned application
       setAppData({
         aidn: application.aidn,
-        appchain: application.appchain,
         name: application.name,
         description: application.description,
         callback: application.callbackUrl,

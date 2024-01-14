@@ -8,7 +8,6 @@ export default function AppRowComponent({
   aidn,
   name,
   callback,
-  appchain,
   homepage,
   description,
   logoUrl,
@@ -29,7 +28,6 @@ export default function AppRowComponent({
       aidn,
       name,
       callback,
-      appchain,
       homepage,
       description,
       logoUrl,
@@ -56,9 +54,6 @@ export default function AppRowComponent({
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {callback}
-        </td>
-        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-          {appchain}
         </td>
         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
           {baseRole}

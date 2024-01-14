@@ -80,12 +80,7 @@ export default function AppsTableComponent() {
                       >
                         Callback URL
                       </th>
-                      <th
-                        scope="col"
-                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
-                      >
-                        Appchain
-                      </th>
+
                       <th
                         scope="col"
                         className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
@@ -107,7 +102,6 @@ export default function AppsTableComponent() {
                         aidn={app.aidn}
                         name={app.name}
                         callback={app.callbackUrl}
-                        appchain={app.appchain}
                         homepage={app.homepage}
                         description={app.description}
                         logoUrl={app.logoUrl}

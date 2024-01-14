@@ -25,7 +25,6 @@ export default function EditApplicationModal({ state, setState }) {
   const [description, setDescription] = useState("");
   const [logoUrl, setLogo] = useState("");
   const [iconUrl, setIcon] = useState("");
-  const [refresh, setRefresh] = useState(false);
   const [baseRole, setBaseRole] = useState("");
 
   // sets the local states based on appData global state
@@ -65,7 +64,6 @@ export default function EditApplicationModal({ state, setState }) {
           {
             callbackUrl: callback,
             name: appName,
-            refreshAppchain: refresh,
             homepage,
             description,
             logoUrl,
@@ -148,8 +146,7 @@ export default function EditApplicationModal({ state, setState }) {
       description === appData.description &&
       logoUrl === appData.logoUrl &&
       iconUrl === appData.iconUrl &&
-      baseRole === appData.baseRole &&
-      refresh === false
+      baseRole === appData.baseRole
     ) {
       setMessage("No changes were made.");
       setAlertStyles("");
@@ -406,32 +403,6 @@ export default function EditApplicationModal({ state, setState }) {
                             required
                             value={baseRole}
                             onChange={(e) => setBaseRole(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                      <div className="relative flex items-start py-4">
-                        <div className="min-w-0 flex-1 text-sm">
-                          <label
-                            htmlFor="comments"
-                            className="font-medium text-gray-700"
-                          >
-                            Generate a new appchain?
-                          </label>
-                          <p
-                            id="comments-description"
-                            className="text-gray-500"
-                          >
-                            Current appchain: {appData.appchain}
-                          </p>
-                        </div>
-                        <div className="ml-3 flex h-5 items-center">
-                          <input
-                            id="comments"
-                            aria-describedby="comments-description"
-                            name="comments"
-                            type="checkbox"
-                            className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            onChange={handleCheckboxChange}
                           />
                         </div>
                       </div>
