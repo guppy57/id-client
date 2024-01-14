@@ -23,7 +23,7 @@ export default function AppsTableComponent() {
               KREATIVE_ID_KEY: cookies.kreative_id_key,
               KREATIVE_AIDN: process.env.NEXT_PUBLIC_AIDN,
             },
-          }
+          },
         );
       } catch (error) {
         // some sort of error, statusCode is not between 200-299
