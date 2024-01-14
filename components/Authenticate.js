@@ -28,7 +28,7 @@ export default function AuthenticateComponent({ children, permissions }) {
   React.useEffect(() => {
     const authenticate = () => {
       console.log("authenticating");
-      console.log(cookies.kreative_id_key)
+      console.log(cookies.kreative_id_key);
       // gets cookies on the client side, if none are found, return false
       if (cookies.kreative_id_key === undefined) {
         // takes the user to the sign in page since there is no key
