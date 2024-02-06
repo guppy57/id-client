@@ -14,10 +14,16 @@ export default function MissingApp() {
       </Head>
       <main className="pt-16">
         <h1 className="pt-12 pb-3 text-center text-2xl">
-          Hello! It seems you came here without being redirected from a Kreative application.
+          Hello! It seems you came here without being redirected from a Kreative
+          application.
         </h1>
         <div className="text-center">
-          <a href="https://kreativeusa.com" target="_blank" className="text-md text-center text-indigo-500" rel="noreferrer">
+          <a
+            href="https://kreativeusa.com"
+            target="_blank"
+            className="text-md text-center text-indigo-500"
+            rel="noreferrer"
+          >
             Go to kreativeusa.com
           </a>
         </div>
