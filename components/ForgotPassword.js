@@ -275,7 +275,7 @@ function ForgotPasswordFunction({ appData }) {
 
   const goBack = (e) => {
     e.preventDefault();
-    router.push(`/signin?aidn=${appData.aidn}`);
+    router.push(`/signin?aidn=${appData.aidn}&testing=${appData.testing}`);
   };
 
   return (
@@ -476,7 +476,7 @@ function ForgotPasswordFunction({ appData }) {
               <p className="mt-2 pt-2 text-center text-sm text-gray-600">
                 Got your password?{" "}
                 <Link
-                  href={`/signin?aidn=${appData.aidn}`}
+                  href={`/signin?aidn=${appData.aidn}&testing=${appData.testing}`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Sign in{" "}
@@ -505,7 +505,7 @@ function ForgotPasswordFunction({ appData }) {
 
 export default function ForgotPasswordComponent() {
   const router = useRouter();
-  const { aidn } = router.query;
+  const { aidn, testing } = router.query;
   const [appData, setAppData] = useState();
 
   React.useEffect(() => {
@@ -516,10 +516,19 @@ export default function ForgotPasswordComponent() {
     axios
       .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
       .then((response) => {
+        let callbackUrl = response.data.data.callbackUrl;
+
+        // check if the referrer is localhost
+        if (testing === "true") {
+          const url = new URL(response.data.data.callbackUrl);
+          callbackUrl = `http://localhost:3000${url.pathname}`;
+        }
+
         setAppData({
           aidn: response.data.data.aidn,
           name: response.data.data.name,
-          callbackUrl: response.data.data.callbackUrl,
+          testing: "true",
+          callbackUrl,
         });
         return () => (mounted = false);
       })
@@ -527,7 +536,7 @@ export default function ForgotPasswordComponent() {
         // unknown error
         console.log(error);
       });
-  }, [aidn]);
+  }, [aidn, testing]);
 
   return <div>{appData && <ForgotPasswordFunction appData={appData} />}</div>;
 }

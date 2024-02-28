@@ -217,7 +217,7 @@ function SigninFunction({ appData }) {
 
                     <div className="text-sm">
                       <Link
-                        href={`/forgot_password?aidn=${appData.aidn}`}
+                        href={`/forgot_password?aidn=${appData.aidn}&testing=${appData.testing}`}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
                         Forgot your password?
@@ -253,7 +253,7 @@ function SigninFunction({ appData }) {
               <p className="mt-2 pt-2 text-center text-sm text-gray-600">
                 Need an account?{" "}
                 <Link
-                  href={`/signup?aidn=${appData.aidn}`}
+                  href={`/signup?aidn=${appData.aidn}&testing=${appData.testing}`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Sign up here{" "}
@@ -282,8 +282,12 @@ function SigninFunction({ appData }) {
 
 export default function SigninComponent() {
   const router = useRouter();
-  const { aidn } = router.query;
+  const { aidn, testing } = router.query;
   const [appData, setAppData] = useState();
+
+  // if the referrer is of url localhost
+  // then take the callbackUrl and parse out the domain name, https, so that all you have is the "/auth" part
+  // then make the callbackUrl http://localhost:3000/${callbackUrl}
 
   React.useEffect(() => {
     let mounted = true;
@@ -293,11 +297,19 @@ export default function SigninComponent() {
     axios
       .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
       .then((response) => {
-        console.log(response);
+        let callbackUrl = response.data.data.callbackUrl;
+
+        // check if the referrer is localhost
+        if (testing === "true") {
+          const url = new URL(response.data.data.callbackUrl);
+          callbackUrl = `http://localhost:3000${url.pathname}`;
+        }
+
         setAppData({
           aidn: response.data.data.aidn,
           name: response.data.data.name,
-          callbackUrl: response.data.data.callbackUrl,
+          testing: "true",
+          callbackUrl,
         });
         return () => (mounted = false);
       })
@@ -305,7 +317,7 @@ export default function SigninComponent() {
         // unknown error
         console.log(error);
       });
-  }, [aidn]);
+  }, [aidn, testing]);
 
   return <div>{appData && <SigninFunction appData={appData} />}</div>;
 }
