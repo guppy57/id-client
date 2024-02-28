@@ -123,7 +123,7 @@ function SigninFunction({ appData }) {
   return (
     <div>
       <div className="flex min-h-screen">
-        <div className="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+        <div className="flex flex-1 flex-col justify-center bg-white/95 py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-32">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
               <Image
@@ -157,7 +157,7 @@ function SigninFunction({ appData }) {
                         type="email"
                         autoComplete="email"
                         required
-                        className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 bg-white/80 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         placeholder="Email address"
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -173,7 +173,7 @@ function SigninFunction({ appData }) {
                         type={showPassword ? "text" : "password"}
                         autoComplete="current-password"
                         required
-                        className="relative block w-full appearance-none rounded-none rounded-bl-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="relative block w-full appearance-none rounded-none rounded-bl-md border border-gray-300 bg-white/80 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -272,10 +272,8 @@ function SigninFunction({ appData }) {
             </div>
           </div>
         </div>
-        <div className="relative hidden w-0 flex-1 lg:block">
-          <Wallpaper />
-        </div>
       </div>
+      <Wallpaper />
     </div>
   );
 }

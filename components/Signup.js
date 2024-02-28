@@ -207,7 +207,7 @@ function SignupFunction({ appData }) {
   return (
     <div>
       <div className="flex min-h-screen">
-        <div className="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+        <div className="flex flex-1 flex-col justify-center bg-white/95 py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
               <Image
@@ -402,9 +402,7 @@ function SignupFunction({ appData }) {
             </div>
           </div>
         </div>
-        <div className="relative hidden w-0 flex-1 lg:block">
-          <Wallpaper />
-        </div>
+        <Wallpaper />
       </div>
     </div>
   );

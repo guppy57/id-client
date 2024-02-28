@@ -90,7 +90,7 @@ function ForgotPasswordFunction({ appData }) {
         "75%",
         "text-sm text-yellow-500"
       );
-    } else if (passwordScore === 2|| passwordScore === 3) {
+    } else if (passwordScore === 2 || passwordScore === 3) {
       changeProgressBar(
         "Password is getting stronger",
         "h-2.5 w-11/12 rounded-full bg-orange-500",
@@ -139,7 +139,7 @@ function ForgotPasswordFunction({ appData }) {
           setFindAccountStyles("hidden");
           setVerifyCodeStyles("-space-y-px rounded-md shadow-sm");
           setKsn(response.data.data.ksn);
-          setTitle('Verify your reset code');
+          setTitle("Verify your reset code");
           setSubtitle(
             `We sent a six-digit reset code to your email at ${email}. Enter it below to continue.`
           );
@@ -192,7 +192,7 @@ function ForgotPasswordFunction({ appData }) {
           setShowSpinner(false);
           setVerifyCodeStyles("hidden");
           setNewPasswordStyles("-space-y-px rounded-md shadow-sm");
-          setTitle('Create your new password');
+          setTitle("Create your new password");
           setSubtitle(`And continue your experience at ${appData.name}`);
         }
       })
@@ -263,7 +263,9 @@ function ForgotPasswordFunction({ appData }) {
             changeAlert("Internal server error. Try again soon.");
           } else if (statusCode === 401) {
             // the reset code is incorrect
-            changeAlert("Uh oh, the reset code is incorrect. Please try again later.");
+            changeAlert(
+              "Uh oh, the reset code is incorrect. Please try again later."
+            );
           } else {
             // some sort of unknown error on the client side
             console.log(error);
@@ -281,7 +283,7 @@ function ForgotPasswordFunction({ appData }) {
   return (
     <div>
       <div className="flex min-h-screen">
-        <div className="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+        <div className="flex flex-1 flex-col justify-center bg-white/95 py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
           <div className="mx-auto w-full max-w-sm lg:w-96">
             <div>
               <Image
@@ -495,9 +497,7 @@ function ForgotPasswordFunction({ appData }) {
             </div>
           </div>
         </div>
-        <div className="relative hidden w-0 flex-1 lg:block">
-          <Wallpaper />
-        </div>
+        <Wallpaper />
       </div>
     </div>
   );
