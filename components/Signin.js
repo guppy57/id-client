@@ -84,7 +84,7 @@ function SigninFunction({ appData }) {
         setKey(response.data.data.keychain.key);
         setTitle(`Welcome back, ${response.data.data.account.firstName}`);
         setSubtitle(
-          `You're ready to go back to ${appData.name} and continue your experience`
+          `You're ready to go back to ${appData.name} and continue your experience`,
         );
       })
       .catch((error) => {
