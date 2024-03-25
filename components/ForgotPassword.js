@@ -277,7 +277,9 @@ function ForgotPasswordFunction({ appData }) {
 
   const goBack = (e) => {
     e.preventDefault();
-    router.push(`/signin?aidn=${appData.aidn}&testing=${appData.testing}`);
+    router.push(
+      `/signin?aidn=${appData.aidn}${appData.testing ? "&testing=true" : ""}`
+    );
   };
 
   return (
@@ -478,7 +480,9 @@ function ForgotPasswordFunction({ appData }) {
               <p className="mt-2 pt-2 text-center text-sm text-gray-600">
                 Got your password?{" "}
                 <Link
-                  href={`/signin?aidn=${appData.aidn}&testing=${appData.testing}`}
+                  href={`/signin?aidn=${appData.aidn}${
+                    appData.testing ? "&testing=true" : ""
+                  }`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Sign in{" "}
@@ -527,7 +531,7 @@ export default function ForgotPasswordComponent() {
         setAppData({
           aidn: response.data.data.aidn,
           name: response.data.data.name,
-          testing: "true",
+          testing: testing == "true",
           callbackUrl,
         });
         return () => (mounted = false);

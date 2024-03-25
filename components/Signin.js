@@ -217,7 +217,9 @@ function SigninFunction({ appData }) {
 
                     <div className="text-sm">
                       <Link
-                        href={`/forgot_password?aidn=${appData.aidn}&testing=${appData.testing}`}
+                        href={`/forgot_password?aidn=${appData.aidn}${
+                          appData.testing ? "&testing=true" : ""
+                        }`}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
                         Forgot your password?
@@ -253,7 +255,9 @@ function SigninFunction({ appData }) {
               <p className="mt-2 pt-2 text-center text-sm text-gray-600">
                 Need an account?{" "}
                 <Link
-                  href={`/signup?aidn=${appData.aidn}&testing=${appData.testing}`}
+                  href={`/signup?aidn=${appData.aidn}${
+                    appData.testing ? "&testing=true" : ""
+                  }`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Sign up here{" "}
@@ -306,7 +310,7 @@ export default function SigninComponent() {
         setAppData({
           aidn: response.data.data.aidn,
           name: response.data.data.name,
-          testing: "true",
+          testing: testing === "true",
           callbackUrl,
         });
         return () => (mounted = false);
