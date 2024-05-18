@@ -32,7 +32,7 @@ function SignupFunction({ appData }) {
   // page element variables
   const [title, setTitle] = useState("Create your account");
   const [subtitle, setSubtitle] = useState(
-    `Then continue back to ${appData.name}`
+    `Then continue back to ${appData.name}`,
   );
   const [formStyles, setFormStyles] = useState("mt-8");
   const [goBackStyles, setGoBackStyles] = useState("hidden");
@@ -77,28 +77,28 @@ function SignupFunction({ appData }) {
         "Password is weak",
         "h-2.5 w-4/12 rounded-full bg-red-600",
         "20%",
-        "text-sm text-red-600"
+        "text-sm text-red-600",
       );
     } else if (passwordScore === 1) {
       changeProgressBar(
         "Password is good",
         "h-2.5 w-8/12 rounded-full bg-yellow-500",
         "75%",
-        "text-sm text-yellow-500"
+        "text-sm text-yellow-500",
       );
     } else if (passwordScore === 2 || passwordScore === 3) {
       changeProgressBar(
         "Password is getting stronger",
         "h-2.5 w-11/12 rounded-full bg-orange-500",
         "90%",
-        "text-sm text-orange-500"
+        "text-sm text-orange-500",
       );
     } else {
       changeProgressBar(
         "This password is hard to crack!",
         "h-2.5 w-12/12 rounded-full bg-green-700",
         "100%",
-        "text-sm text-green-700"
+        "text-sm text-green-700",
       );
     }
   };
@@ -113,7 +113,7 @@ function SignupFunction({ appData }) {
     // make sure username is only made up of letters, numbers, underscores, and periods
     if (!/^[a-zA-Z0-9_.]*$/.test(username)) {
       changeAlert(
-        "Username can only be made up of letters, numbers, underscores, and periods"
+        "Username can only be made up of letters, numbers, underscores, and periods",
       );
       return;
     }
@@ -163,7 +163,7 @@ function SignupFunction({ appData }) {
         setKey(response.data.data.keychain.key);
         setTitle("Welcome to Kreative");
         setSubtitle(
-          `You're ready to go back to ${appData.name} and continue your experience`
+          `You're ready to go back to ${appData.name} and continue your experience`,
         );
       })
       .catch((error) => {
@@ -436,7 +436,7 @@ export default function SignupComponent() {
             callbackUrl = `https://docuvet-dev.kreativeusa.com${url.pathname}`;
           }
         }
-        
+
         setAppData({
           aidn: response.data.data.aidn,
           name: response.data.data.name,
