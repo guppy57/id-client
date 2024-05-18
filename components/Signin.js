@@ -6,7 +6,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
-
 import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
 
@@ -218,7 +217,7 @@ function SigninFunction({ appData }) {
                     <div className="text-sm">
                       <Link
                         href={`/forgot_password?aidn=${appData.aidn}${
-                          appData.testing ? "&testing=true" : ""
+                          appData.testing ? `&testing=${appData.testingInfo}` : ""
                         }`}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
@@ -256,7 +255,7 @@ function SigninFunction({ appData }) {
                 Need an account?{" "}
                 <Link
                   href={`/signup?aidn=${appData.aidn}${
-                    appData.testing ? "&testing=true" : ""
+                    appData.testing ? `&testing=${appData.testingInfo}` : ""
                   }`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
@@ -302,15 +301,21 @@ export default function SigninComponent() {
         let callbackUrl = response.data.data.callbackUrl;
 
         // check if the referrer is localhost
-        if (testing === "true") {
-          const url = new URL(response.data.data.callbackUrl);
-          callbackUrl = `http://localhost:3000${url.pathname}`;
+        if (testing !== undefined) {
+          if (testing.includes("true") && testing.includes("local")) {
+            const url = new URL(response.data.data.callbackUrl);
+            callbackUrl = `http://localhost:3000${url.pathname}`;
+          } else if (testing.includes("true") && testing.includes("dev")) {
+            const url = new URL(response.data.data.callbackUrl);
+            callbackUrl = `https://docuvet-dev.kreativeusa.com${url.pathname}`;
+          }
         }
-
+        
         setAppData({
           aidn: response.data.data.aidn,
           name: response.data.data.name,
-          testing: testing === "true",
+          testing: testing !== undefined,
+          testingInfo: testing,
           callbackUrl,
         });
         return () => (mounted = false);
