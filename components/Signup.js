@@ -149,6 +149,7 @@ function SignupFunction({ appData }) {
     // makes post request for the signup api
     axios
       .post("https://id-api.kreativeusa.com/v1/accounts/signup", {
+        environment: appData.testing ? "development" : "production",
         email: email.toLowerCase(),
         username: username.toLowerCase(),
         password,
