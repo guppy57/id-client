@@ -70,7 +70,7 @@ function SigninFunction({ appData }) {
     // makes post request for the signin api
     axios
       .post("https://id-api.kreativeusa.com/v1/accounts/signin", {
-      environment: appData.testing ? "development" : "production",
+        environment: appData.testing ? "development" : "production",
         aidn: parseInt(appData.aidn),
         email: email.toLowerCase(),
         password,
