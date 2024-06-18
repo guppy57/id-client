@@ -84,7 +84,7 @@ function SigninFunction({ appData }) {
         setKey(response.data.data.keychain.key);
         setTitle(`Welcome back, ${response.data.data.account.firstName}`);
         setSubtitle(
-          `You're ready to go back to ${appData.name} and continue your experience`
+          `You're ready to go back to ${appData.name} and continue your experience`,
         );
       })
       .catch((error) => {
@@ -218,7 +218,9 @@ function SigninFunction({ appData }) {
                     <div className="text-sm">
                       <Link
                         href={`/forgot_password?aidn=${appData.aidn}${
-                          appData.testing ? `&testing=${appData.testingInfo}` : ""
+                          appData.testing
+                            ? `&testing=${appData.testingInfo}`
+                            : ""
                         }`}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
@@ -311,7 +313,7 @@ export default function SigninComponent() {
             callbackUrl = `https://docuvet-dev.kreativeusa.com${url.pathname}`;
           }
         }
-        
+
         setAppData({
           aidn: response.data.data.aidn,
           name: response.data.data.name,
