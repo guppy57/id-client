@@ -482,6 +482,10 @@ function ForgotPasswordFunction({ appData }) {
                 <Link
                   href={`/signin?aidn=${appData.aidn}${
                     appData.testing ? `&testing=${appData.testingInfo}` : ""
+                  }${
+                    appData.restrict ? `&restrict=${restrict}` : ""
+                  }${
+                    appData.platform ? `&platform=${appData.platform}` : ""
                   }`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
@@ -509,7 +513,7 @@ function ForgotPasswordFunction({ appData }) {
 
 export default function ForgotPasswordComponent() {
   const router = useRouter();
-  const { aidn, testing } = router.query;
+  const { aidn, testing, platform, restrict } = router.query;
   const [appData, setAppData] = useState();
 
   React.useEffect(() => {
@@ -521,6 +525,10 @@ export default function ForgotPasswordComponent() {
       .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
       .then((response) => {
         let callbackUrl = response.data.data.callbackUrl;
+
+        if (platform === "mobile") {
+          callbackUrl = response.data.data.mobileCallbackUrl;
+        }
 
         // check if the referrer is localhost
         if (testing !== undefined) {
@@ -534,11 +542,13 @@ export default function ForgotPasswordComponent() {
         }
         
         setAppData({
+          testing: testing !== undefined,
           aidn: response.data.data.aidn,
           name: response.data.data.name,
-          testing: testing !== undefined,
           testingInfo: testing,
           callbackUrl,
+          platform,
+          restrict,
         });
         return () => (mounted = false);
       })
@@ -546,7 +556,7 @@ export default function ForgotPasswordComponent() {
         // unknown error
         console.log(error);
       });
-  }, [aidn, testing]);
+  }, [aidn, testing, platform, restrict]);
 
   return <div>{appData && <ForgotPasswordFunction appData={appData} />}</div>;
 }

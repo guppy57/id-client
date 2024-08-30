@@ -386,6 +386,14 @@ function SignupFunction({ appData }) {
                 <Link
                   href={`/signin?aidn=${appData.aidn}${
                     appData.testing ? `&testing=${appData.testingInfo}` : ""
+                  }${
+                    appData.platform
+                      ? `&platform=${appData.platform}`
+                      : ""
+                  }${
+                    appData.restrict
+                      ? `&restrict=${appData.restrict}`
+                      : ""
                   }`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
@@ -413,7 +421,7 @@ function SignupFunction({ appData }) {
 
 export default function SignupComponent() {
   const router = useRouter();
-  const { aidn, testing } = router.query;
+  const { aidn, testing, platform, restrict } = router.query;
   const [appData, setAppData] = useState();
 
   React.useEffect(() => {
@@ -426,6 +434,10 @@ export default function SignupComponent() {
       .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
       .then((response) => {
         let callbackUrl = response.data.data.callbackUrl;
+
+        if (platform === "mobile") {
+          callbackUrl = response.data.data.mobileCallbackUrl;
+        }
 
         // check if the referrer is localhost
         if (testing !== undefined) {
@@ -444,6 +456,8 @@ export default function SignupComponent() {
           testing: testing !== undefined,
           testingInfo: testing,
           callbackUrl,
+          platform,
+          restrict
         });
         return () => (mounted = false);
       })
@@ -451,7 +465,7 @@ export default function SignupComponent() {
         // unknown error
         console.log(error);
       });
-  }, [aidn, testing]);
+  }, [aidn, testing, platform, restrict]);
 
   return <div>{appData && <SignupFunction appData={appData} />}</div>;
 }

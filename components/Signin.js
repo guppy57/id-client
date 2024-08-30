@@ -196,7 +196,6 @@ function SigninFunction({ appData }) {
                       </button>
                     </div>
                   </div>
-
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <input
@@ -214,13 +213,14 @@ function SigninFunction({ appData }) {
                         Remember me
                       </label>
                     </div>
-
                     <div className="text-sm">
                       <Link
                         href={`/forgot_password?aidn=${appData.aidn}${
-                          appData.testing
-                            ? `&testing=${appData.testingInfo}`
-                            : ""
+                          appData.testing ? `&testing=${appData.testingInfo}` : ""
+                        }${
+                          appData.restrict ? `&restrict=${appData.restrict}` : ""
+                        }${
+                          appData.platform ? `&platform=${appData.platform}` : ""
                         }`}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
@@ -254,17 +254,23 @@ function SigninFunction({ appData }) {
                   </div>
                 </form>
               </div>
-              <p className="mt-2 pt-2 text-center text-sm text-gray-600">
-                Need an account?{" "}
-                <Link
-                  href={`/signup?aidn=${appData.aidn}${
-                    appData.testing ? `&testing=${appData.testingInfo}` : ""
-                  }`}
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
-                >
-                  Sign up here{" "}
-                </Link>
-              </p>
+              {appData.restrict === "registration" ? null : (
+                <p className="mt-2 pt-2 text-center text-sm text-gray-600">
+                  Need an account?{" "}
+                  <Link
+                    href={`/signup?aidn=${appData.aidn}${
+                      appData.testing ? `&testing=${appData.testingInfo}` : ""
+                    }${
+                      appData.platform ? `&platform=${appData.platform}` : ""
+                    }${
+                      appData.restrict ? `&restrict=${appData.restrict}` : ""
+                    }`}
+                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    Sign up here{" "}
+                  </Link>
+                </p>
+              )}
             </div>
             <div id="go-back-button" className={goBackStyles}>
               <div>
@@ -286,22 +292,25 @@ function SigninFunction({ appData }) {
 
 export default function SigninComponent() {
   const router = useRouter();
-  const { aidn, testing } = router.query;
+  const { aidn, testing, platform, restrict } = router.query;
   const [appData, setAppData] = useState();
 
   // if the referrer is of url localhost
   // then take the callbackUrl and parse out the domain name, https, so that all you have is the "/auth" part
   // then make the callbackUrl http://localhost:3000/${callbackUrl}
-
   React.useEffect(() => {
     let mounted = true;
-
+  
     if (!aidn) return;
 
     axios
       .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
       .then((response) => {
         let callbackUrl = response.data.data.callbackUrl;
+
+        if (platform === "mobile") {
+          callbackUrl = response.data.data.mobileCallbackUrl;
+        }
 
         // check if the referrer is localhost
         if (testing !== undefined) {
@@ -315,11 +324,13 @@ export default function SigninComponent() {
         }
 
         setAppData({
+          testing: testing !== undefined,
           aidn: response.data.data.aidn,
           name: response.data.data.name,
-          testing: testing !== undefined,
           testingInfo: testing,
           callbackUrl,
+          platform,
+          restrict,
         });
         return () => (mounted = false);
       })
@@ -327,7 +338,7 @@ export default function SigninComponent() {
         // unknown error
         console.log(error);
       });
-  }, [aidn, testing]);
+  }, [aidn, testing, platform, restrict]);
 
   return <div>{appData && <SigninFunction appData={appData} />}</div>;
 }
