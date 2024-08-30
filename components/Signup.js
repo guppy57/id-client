@@ -328,46 +328,62 @@ function SignupFunction({ appData }) {
                     </div>
                   </div>
                   <AnimatePresence>
-                  {showUsernameField && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                      animate={{ opacity: 1, y: 0, scale: 1, transition: { delay: 0.2, duration: 0.25 } }}
-                      exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.25 } }}
-                      className="mt-1 sm:col-span-2 sm:mt-0"
-                    >
-                      <div className="flex max-w-full rounded-md shadow-sm">
-                        <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
-                          @
-                        </span>
-                        <input
-                          type="text"
-                          name="username"
-                          id="username"
-                          autoComplete="username" // skipcq
-                          value={username}
-                          placeholder="Username"
-                          className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          onChange={(e) => setUsername(e.target.value)}
-                          onFocus={() => setShowUsernameHelpText(true)}
-                          onBlur={() => setShowUsernameHelpText(false)}
-                          required
-                        />
-                      </div>
-                      <AnimatePresence>
-                        {showUsernameHelpText && (
-                          <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1, transition: { delay: 0.1, duration: 0.3 } }}
-                            exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                            className="mt-1.5 text-[0.875rem] leading-[1rem] text-gray-500"
-                          >
-                            Usernames are case-insensitive and only contain
-                            letters, numbers, underscores, and periods.
-                          </motion.p>
-                        )}
+                    {showUsernameField && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                          scale: 1,
+                          transition: { delay: 0.2, duration: 0.25 },
+                        }}
+                        exit={{
+                          opacity: 0,
+                          y: 10,
+                          scale: 0.9,
+                          transition: { duration: 0.25 },
+                        }}
+                        className="mt-1 sm:col-span-2 sm:mt-0"
+                      >
+                        <div className="flex max-w-full rounded-md shadow-sm">
+                          <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
+                            @
+                          </span>
+                          <input
+                            type="text"
+                            name="username"
+                            id="username"
+                            autoComplete="username" // skipcq
+                            value={username}
+                            placeholder="Username"
+                            className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            onChange={(e) => setUsername(e.target.value)}
+                            onFocus={() => setShowUsernameHelpText(true)}
+                            onBlur={() => setShowUsernameHelpText(false)}
+                            required
+                          />
+                        </div>
+                        <AnimatePresence>
+                          {showUsernameHelpText && (
+                            <motion.p
+                              initial={{ opacity: 0 }}
+                              animate={{
+                                opacity: 1,
+                                transition: { delay: 0.1, duration: 0.3 },
+                              }}
+                              exit={{
+                                opacity: 0,
+                                transition: { duration: 0.2 },
+                              }}
+                              className="mt-1.5 text-[0.875rem] leading-[1rem] text-gray-500"
+                            >
+                              Usernames are case-insensitive and only contain
+                              letters, numbers, underscores, and periods.
+                            </motion.p>
+                          )}
                         </AnimatePresence>
-                    </motion.div>
-                  )}
+                      </motion.div>
+                    )}
                   </AnimatePresence>
 
                   <div>
@@ -401,14 +417,8 @@ function SignupFunction({ appData }) {
                 <Link
                   href={`/signin?aidn=${appData.aidn}${
                     appData.testing ? `&testing=${appData.testingInfo}` : ""
-                  }${
-                    appData.platform
-                      ? `&platform=${appData.platform}`
-                      : ""
-                  }${
-                    appData.restrict
-                      ? `&restrict=${appData.restrict}`
-                      : ""
+                  }${appData.platform ? `&platform=${appData.platform}` : ""}${
+                    appData.restrict ? `&restrict=${appData.restrict}` : ""
                   }`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
@@ -472,7 +482,7 @@ export default function SignupComponent() {
           testingInfo: testing,
           callbackUrl,
           platform,
-          restrict
+          restrict,
         });
         return () => (mounted = false);
       })
