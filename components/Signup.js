@@ -41,6 +41,7 @@ function SignupFunction({ appData }) {
   const [showPassword, setShowPassword] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
   const [showUsernameHelpText, setShowUsernameHelpText] = useState(false);
+  const [showUsernameField, setShowUsernameField] = useState(false);
 
   // regex expression for checking if a string is a valid email address
   const regexExp =
@@ -229,40 +230,6 @@ function SignupFunction({ appData }) {
             <div className={formStyles}>
               <div className="mt-6">
                 <form className="mt-8 space-y-6">
-                  <div className="mt-1 sm:col-span-2 sm:mt-0">
-                    <div className="flex max-w-full rounded-md shadow-sm">
-                      <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
-                        @
-                      </span>
-                      <input
-                        type="text"
-                        name="username"
-                        id="username"
-                        autoComplete="username" // skipcq
-                        value={username}
-                        placeholder="Username"
-                        className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        onChange={(e) => setUsername(e.target.value)}
-                        onFocus={() => setShowUsernameHelpText(true)}
-                        onBlur={() => setShowUsernameHelpText(false)}
-                        required
-                      />
-                    </div>
-                    <AnimatePresence>
-                      {showUsernameHelpText && (
-                        <motion.p
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.1 }}
-                          className="mt-1.5 text-[0.875rem] leading-[1rem] text-gray-500"
-                        >
-                          Usernames are case-insensitive and only contain
-                          letters, numbers, underscores, and periods.
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
-                  </div>
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="-space-y-px rounded-md shadow-sm">
                     <div className="flex -space-x-px rounded-t-md rounded-b-none">
@@ -275,7 +242,7 @@ function SignupFunction({ appData }) {
                           name="first-name"
                           id="first-name"
                           value={fname}
-                          className="relative block w-full rounded-none rounded-tl-md border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          className="relative block w-full rounded-none rounded-tl-md border-gray-300 focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder="First name"
                           onChange={(e) => setFname(e.target.value)}
                         />
@@ -289,7 +256,7 @@ function SignupFunction({ appData }) {
                           name="last-name"
                           id="last-name"
                           value={lname}
-                          className="relative block w-full rounded-none rounded-tr-md border-gray-300 bg-transparent focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          className="relative block w-full rounded-none rounded-tr-md border-gray-300 focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder="Last name"
                           onChange={(e) => setLname(e.target.value)}
                         />
@@ -309,7 +276,13 @@ function SignupFunction({ appData }) {
                         required
                         className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         placeholder="Email address"
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                        }}
+                        onBlur={() => {
+                          setShowUsernameField(true);
+                          if (username === "") setUsername(email.split("@")[0]);
+                        }}
                       />
                     </div>
                     <div className="relative flex flex-grow items-stretch focus-within:z-10">
@@ -354,6 +327,48 @@ function SignupFunction({ appData }) {
                       />
                     </div>
                   </div>
+                  <AnimatePresence>
+                  {showUsernameField && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1, transition: { delay: 0.2, duration: 0.25 } }}
+                      exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.25 } }}
+                      className="mt-1 sm:col-span-2 sm:mt-0"
+                    >
+                      <div className="flex max-w-full rounded-md shadow-sm">
+                        <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
+                          @
+                        </span>
+                        <input
+                          type="text"
+                          name="username"
+                          id="username"
+                          autoComplete="username" // skipcq
+                          value={username}
+                          placeholder="Username"
+                          className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          onChange={(e) => setUsername(e.target.value)}
+                          onFocus={() => setShowUsernameHelpText(true)}
+                          onBlur={() => setShowUsernameHelpText(false)}
+                          required
+                        />
+                      </div>
+                      <AnimatePresence>
+                        {showUsernameHelpText && (
+                          <motion.p
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1, transition: { delay: 0.1, duration: 0.3 } }}
+                            exit={{ opacity: 0, transition: { duration: 0.2 } }}
+                            className="mt-1.5 text-[0.875rem] leading-[1rem] text-gray-500"
+                          >
+                            Usernames are case-insensitive and only contain
+                            letters, numbers, underscores, and periods.
+                          </motion.p>
+                        )}
+                        </AnimatePresence>
+                    </motion.div>
+                  )}
+                  </AnimatePresence>
 
                   <div>
                     <button
