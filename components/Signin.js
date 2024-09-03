@@ -117,7 +117,11 @@ function SigninFunction({ appData }) {
 
   const goBack = (e) => {
     e.preventDefault();
-    window.location.href = `${appData.callbackUrl}?key=${key}`;
+    let url = `${appData.callbackUrl}?key=${key}`;
+
+    if (appData.inviteCode) url += `&inviteCode=${appData.inviteCode}`;
+
+    window.location.href = url;
   };
 
   return (
@@ -221,6 +225,8 @@ function SigninFunction({ appData }) {
                           appData.restrict ? `&restrict=${appData.restrict}` : ""
                         }${
                           appData.platform ? `&platform=${appData.platform}` : ""
+                        }${
+                          appData.inviteCode ? `&inviteCode=${appData.inviteCode}` : ""
                         }`}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
@@ -264,6 +270,8 @@ function SigninFunction({ appData }) {
                       appData.platform ? `&platform=${appData.platform}` : ""
                     }${
                       appData.restrict ? `&restrict=${appData.restrict}` : ""
+                    }${
+                      appData.inviteCode ? `&inviteCode=${appData.inviteCode}` : ""
                     }`}
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
@@ -292,7 +300,7 @@ function SigninFunction({ appData }) {
 
 export default function SigninComponent() {
   const router = useRouter();
-  const { aidn, testing, platform, restrict } = router.query;
+  const { aidn, testing, platform, restrict, inviteCode } = router.query;
   const [appData, setAppData] = useState();
 
   // if the referrer is of url localhost
@@ -331,6 +339,7 @@ export default function SigninComponent() {
           callbackUrl,
           platform,
           restrict,
+          inviteCode
         });
         return () => (mounted = false);
       })
@@ -338,7 +347,7 @@ export default function SigninComponent() {
         // unknown error
         console.log(error);
       });
-  }, [aidn, testing, platform, restrict]);
+  }, [aidn, testing, platform, restrict, inviteCode]);
 
   return <div>{appData && <SigninFunction appData={appData} />}</div>;
 }

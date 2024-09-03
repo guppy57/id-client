@@ -203,7 +203,11 @@ function SignupFunction({ appData }) {
 
   const goBack = (e) => {
     e.preventDefault();
-    window.location.href = `${appData.callbackUrl}?key=${key}`;
+    let url = `${appData.callbackUrl}?key=${key}`;
+
+    if (appData.inviteCode) url += `&inviteCode=${appData.inviteCode}`;
+
+    window.location.href = url;
   };
 
   return (
@@ -409,6 +413,10 @@ function SignupFunction({ appData }) {
                     appData.restrict
                       ? `&restrict=${appData.restrict}`
                       : ""
+                  }${
+                    appData.inviteCode
+                      ? `&inviteCode=${appData.inviteCode}`
+                      : ""
                   }`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
@@ -436,7 +444,7 @@ function SignupFunction({ appData }) {
 
 export default function SignupComponent() {
   const router = useRouter();
-  const { aidn, testing, platform, restrict } = router.query;
+  const { aidn, testing, platform, restrict, inviteCode } = router.query;
   const [appData, setAppData] = useState();
 
   React.useEffect(() => {
@@ -472,7 +480,8 @@ export default function SignupComponent() {
           testingInfo: testing,
           callbackUrl,
           platform,
-          restrict
+          restrict,
+          inviteCode,
         });
         return () => (mounted = false);
       })
@@ -480,7 +489,7 @@ export default function SignupComponent() {
         // unknown error
         console.log(error);
       });
-  }, [aidn, testing, platform, restrict]);
+  }, [aidn, testing, platform, restrict, inviteCode]);
 
   return <div>{appData && <SignupFunction appData={appData} />}</div>;
 }

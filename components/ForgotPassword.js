@@ -277,9 +277,14 @@ function ForgotPasswordFunction({ appData }) {
 
   const goBack = (e) => {
     e.preventDefault();
-    router.push(
-      `/signin?aidn=${appData.aidn}${appData.testing ? `&testing=${appData.testingInfo}` : ""}`
-    );
+    let url = `/signin?aidn=${appData.aidn}`;
+
+    if (appData.testing) url += `&testing=${appData.testingInfo}`;
+    if (appData.restrict) url += `&restrict=${appData.restrict}`;
+    if (appData.platform) url += `&platform=${appData.platform}`;
+    if (appData.inviteCode) url += `&inviteCode=${appData.inviteCode}`;
+
+    router.push(url);
   };
 
   return (
@@ -486,6 +491,10 @@ function ForgotPasswordFunction({ appData }) {
                     appData.restrict ? `&restrict=${restrict}` : ""
                   }${
                     appData.platform ? `&platform=${appData.platform}` : ""
+                  }${
+                    appData.inviteCode
+                      ? `&inviteCode=${appData.inviteCode}`
+                      : ""
                   }`}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
@@ -513,7 +522,7 @@ function ForgotPasswordFunction({ appData }) {
 
 export default function ForgotPasswordComponent() {
   const router = useRouter();
-  const { aidn, testing, platform, restrict } = router.query;
+  const { aidn, testing, platform, restrict, inviteCode } = router.query;
   const [appData, setAppData] = useState();
 
   React.useEffect(() => {
@@ -549,6 +558,7 @@ export default function ForgotPasswordComponent() {
           callbackUrl,
           platform,
           restrict,
+          inviteCode,
         });
         return () => (mounted = false);
       })
@@ -556,7 +566,7 @@ export default function ForgotPasswordComponent() {
         // unknown error
         console.log(error);
       });
-  }, [aidn, testing, platform, restrict]);
+  }, [aidn, testing, platform, restrict, inviteCode]);
 
   return <div>{appData && <ForgotPasswordFunction appData={appData} />}</div>;
 }
