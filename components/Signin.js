@@ -16,13 +16,8 @@ function SigninFunction({ appData }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(true);
-  const [key, setKey] = useState();
 
   // page element variables
-  const [title, setTitle] = useState("Sign in to your account");
-  const [subtitle, setSubtitle] = useState(`to continue to ${appData.name}`);
-  const [formStyles, setFormStyles] = useState("mt-8");
-  const [goBackStyles, setGoBackStyles] = useState("hidden");
   const [alertMessage, setAlertMessage] = useState("");
   const [alertStyles, setAlertStyles] = useState("hidden");
   const [showPassword, setShowPassword] = useState(false);
@@ -77,15 +72,7 @@ function SigninFunction({ appData }) {
         rememberMe,
       })
       .then((response) => {
-        // information passed
-        setShowSpinner(false);
-        setFormStyles("hidden");
-        setGoBackStyles("mt-8");
-        setKey(response.data.data.keychain.key);
-        setTitle(`Welcome back, ${response.data.data.account.firstName}`);
-        setSubtitle(
-          `You're ready to go back to ${appData.name} and continue your experience`,
-        );
+        goBack(response.data.data.keychain.key);
       })
       .catch((error) => {
         setShowSpinner(false);
@@ -115,9 +102,8 @@ function SigninFunction({ appData }) {
       });
   };
 
-  const goBack = (e) => {
-    e.preventDefault();
-    let url = `${appData.callbackUrl}?key=${key}`;
+  const goBack = (keychain) => {
+    let url = `${appData.callbackUrl}?key=${keychain}`;
 
     if (appData.inviteCode) url += `&inviteCode=${appData.inviteCode}`;
 
@@ -138,14 +124,16 @@ function SigninFunction({ appData }) {
                 width={136}
               />
               <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
-                {title}
+                Sign in to your account
               </h2>
-              <p className="text-md mt-2 text-gray-600">{subtitle}</p>
+              <p className="text-md mt-2 text-gray-600">
+                to continue to {appData.name}
+              </p>
             </div>
             <div id="alert" className={alertStyles}>
               <AlertComponent message={alertMessage} />
             </div>
-            <div id="signin-form" className={formStyles}>
+            <div id="signin-form" className="mt-8">
               <div className="mt-6">
                 <form className="mt-8 space-y-6">
                   <input type="hidden" name="remember" defaultValue="true" />
@@ -279,16 +267,6 @@ function SigninFunction({ appData }) {
                   </Link>
                 </p>
               )}
-            </div>
-            <div id="go-back-button" className={goBackStyles}>
-              <div>
-                <button
-                  onClick={(e) => goBack(e)}
-                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  Go back
-                </button>
-              </div>
             </div>
           </div>
         </div>
