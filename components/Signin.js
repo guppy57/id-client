@@ -208,13 +208,21 @@ function SigninFunction({ appData }) {
                     <div className="text-sm">
                       <Link
                         href={`/forgot_password?aidn=${appData.aidn}${
-                          appData.testing ? `&testing=${appData.testingInfo}` : ""
+                          appData.testing
+                            ? `&testing=${appData.testingInfo}`
+                            : ""
                         }${
-                          appData.restrict ? `&restrict=${appData.restrict}` : ""
+                          appData.restrict
+                            ? `&restrict=${appData.restrict}`
+                            : ""
                         }${
-                          appData.platform ? `&platform=${appData.platform}` : ""
+                          appData.platform
+                            ? `&platform=${appData.platform}`
+                            : ""
                         }${
-                          appData.inviteCode ? `&inviteCode=${appData.inviteCode}` : ""
+                          appData.inviteCode
+                            ? `&inviteCode=${appData.inviteCode}`
+                            : ""
                         }`}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
@@ -259,7 +267,9 @@ function SigninFunction({ appData }) {
                     }${
                       appData.restrict ? `&restrict=${appData.restrict}` : ""
                     }${
-                      appData.inviteCode ? `&inviteCode=${appData.inviteCode}` : ""
+                      appData.inviteCode
+                        ? `&inviteCode=${appData.inviteCode}`
+                        : ""
                     }`}
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
@@ -286,7 +296,7 @@ export default function SigninComponent() {
   // then make the callbackUrl http://localhost:3000/${callbackUrl}
   React.useEffect(() => {
     let mounted = true;
-  
+
     if (!aidn) return;
 
     axios
@@ -317,7 +327,7 @@ export default function SigninComponent() {
           callbackUrl,
           platform,
           restrict,
-          inviteCode
+          inviteCode,
         });
         return () => (mounted = false);
       })
