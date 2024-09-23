@@ -2,7 +2,7 @@
 import { useAtom } from "jotai";
 import { useRouter } from "next/router";
 import { editAppModalStore } from "../../../stores/editAppModalStore";
-import { appDataStore } from "../../../stores/appDataStore";
+import { appDataStore } from "../../../stores/applicationStore";
 
 export default function AppRowComponent({
   aidn,

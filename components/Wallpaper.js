@@ -19,7 +19,6 @@ export default function WallpaperComponent() {
   };
 
   useEffect(() => {
-    console.log(gradient);
     if (gradient != "") return;
 
     const randomGradient = getRandomGradient();
