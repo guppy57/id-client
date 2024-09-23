@@ -332,7 +332,7 @@ export default function ForgotPasswordFunction({ appData }) {
                     <div>
                       <button
                         onClick={(e) => findAccount(e)}
-                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         {showSpinner ? (
                           <div className="flex items-center justify-center space-x-3">
@@ -374,7 +374,7 @@ export default function ForgotPasswordFunction({ appData }) {
                     <div>
                       <button
                         onClick={(e) => verifyCode(e)}
-                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         {showSpinner ? (
                           <div className="flex items-center justify-center space-x-3">
@@ -458,7 +458,7 @@ export default function ForgotPasswordFunction({ appData }) {
                     <div>
                       <button
                         onClick={(e) => createNewPassword(e)}
-                        className="group relative mt-3 flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="group relative mt-3 flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       >
                         {showSpinner ? (
                           <div className="flex items-center justify-center space-x-3">
@@ -487,9 +487,7 @@ export default function ForgotPasswordFunction({ appData }) {
                 <Link
                   href={`/signin?aidn=${appData.aidn}${
                     appData.testing ? `&testing=${appData.testingInfo}` : ""
-                  }${
-                    appData.restrict ? `&restrict=${restrict}` : ""
-                  }${
+                  }${appData.restrict ? `&restrict=${restrict}` : ""}${
                     appData.platform ? `&platform=${appData.platform}` : ""
                   }${
                     appData.inviteCode
@@ -506,7 +504,7 @@ export default function ForgotPasswordFunction({ appData }) {
               <div>
                 <button
                   onClick={(e) => goBack(e)}
-                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Return to sign in
                 </button>

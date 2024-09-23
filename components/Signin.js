@@ -208,13 +208,21 @@ export default function SigninFunction({ appData }) {
                     <div className="text-sm">
                       <Link
                         href={`/forgot_password?aidn=${appData.aidn}${
-                          appData.testing ? `&testing=${appData.testingInfo}` : ""
+                          appData.testing
+                            ? `&testing=${appData.testingInfo}`
+                            : ""
                         }${
-                          appData.restrict ? `&restrict=${appData.restrict}` : ""
+                          appData.restrict
+                            ? `&restrict=${appData.restrict}`
+                            : ""
                         }${
-                          appData.platform ? `&platform=${appData.platform}` : ""
+                          appData.platform
+                            ? `&platform=${appData.platform}`
+                            : ""
                         }${
-                          appData.inviteCode ? `&inviteCode=${appData.inviteCode}` : ""
+                          appData.inviteCode
+                            ? `&inviteCode=${appData.inviteCode}`
+                            : ""
                         }`}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
@@ -225,7 +233,7 @@ export default function SigninFunction({ appData }) {
                   <div>
                     <button
                       onClick={(e) => createSigninInstance(e)}
-                      className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       {showSpinner ? (
                         <div className="flex items-center justify-center space-x-3">
@@ -259,7 +267,9 @@ export default function SigninFunction({ appData }) {
                     }${
                       appData.restrict ? `&restrict=${appData.restrict}` : ""
                     }${
-                      appData.inviteCode ? `&inviteCode=${appData.inviteCode}` : ""
+                      appData.inviteCode
+                        ? `&inviteCode=${appData.inviteCode}`
+                        : ""
                     }`}
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >

@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import * as React from "react";
 import { useState } from "react";
-import { useRouter } from "next/router";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import zxcvbn from "zxcvbn";
@@ -32,7 +31,7 @@ export default function SignupFunction({ appData }) {
   // page element variables
   const [title, setTitle] = useState("Create your account");
   const [subtitle, setSubtitle] = useState(
-    `Then continue back to ${appData.name}`,
+    `Then continue back to ${appData.name}`
   );
   const [formStyles, setFormStyles] = useState("mt-8");
   const [goBackStyles, setGoBackStyles] = useState("hidden");
@@ -78,28 +77,28 @@ export default function SignupFunction({ appData }) {
         "Password is weak",
         "h-2.5 w-4/12 rounded-full bg-red-600",
         "20%",
-        "text-sm text-red-600",
+        "text-sm text-red-600"
       );
     } else if (passwordScore === 1) {
       changeProgressBar(
         "Password is good",
         "h-2.5 w-8/12 rounded-full bg-yellow-500",
         "75%",
-        "text-sm text-yellow-500",
+        "text-sm text-yellow-500"
       );
     } else if (passwordScore === 2 || passwordScore === 3) {
       changeProgressBar(
         "Password is getting stronger",
         "h-2.5 w-11/12 rounded-full bg-orange-500",
         "90%",
-        "text-sm text-orange-500",
+        "text-sm text-orange-500"
       );
     } else {
       changeProgressBar(
         "This password is hard to crack!",
         "h-2.5 w-12/12 rounded-full bg-green-700",
         "100%",
-        "text-sm text-green-700",
+        "text-sm text-green-700"
       );
     }
   };
@@ -114,7 +113,7 @@ export default function SignupFunction({ appData }) {
     // make sure username is only made up of letters, numbers, underscores, and periods
     if (!/^[a-zA-Z0-9_.]*$/.test(username)) {
       changeAlert(
-        "Username can only be made up of letters, numbers, underscores, and periods",
+        "Username can only be made up of letters, numbers, underscores, and periods"
       );
       return;
     }
@@ -165,7 +164,7 @@ export default function SignupFunction({ appData }) {
         setKey(response.data.data.keychain.key);
         setTitle("Welcome to Kreative");
         setSubtitle(
-          `You're ready to go back to ${appData.name} and continue your experience`,
+          `You're ready to go back to ${appData.name} and continue your experience`
         );
       })
       .catch((error) => {
@@ -332,52 +331,68 @@ export default function SignupFunction({ appData }) {
                     </div>
                   </div>
                   <AnimatePresence>
-                  {showUsernameField && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                      animate={{ opacity: 1, y: 0, scale: 1, transition: { delay: 0.2, duration: 0.25 } }}
-                      exit={{ opacity: 0, y: 10, scale: 0.9, transition: { duration: 0.25 } }}
-                      className="mt-1 sm:col-span-2 sm:mt-0"
-                    >
-                      <div className="flex max-w-full rounded-md shadow-sm">
-                        <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
-                          @
-                        </span>
-                        <input
-                          type="text"
-                          name="username"
-                          id="username"
-                          autoComplete="username" // skipcq
-                          value={username}
-                          placeholder="Username"
-                          className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                          onChange={(e) => setUsername(e.target.value)}
-                          onFocus={() => setShowUsernameHelpText(true)}
-                          onBlur={() => setShowUsernameHelpText(false)}
-                          required
-                        />
-                      </div>
-                      <AnimatePresence>
-                        {showUsernameHelpText && (
-                          <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1, transition: { delay: 0.1, duration: 0.3 } }}
-                            exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                            className="mt-1.5 text-[0.875rem] leading-[1rem] text-gray-500"
-                          >
-                            Usernames are case-insensitive and only contain
-                            letters, numbers, underscores, and periods.
-                          </motion.p>
-                        )}
+                    {showUsernameField && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                          scale: 1,
+                          transition: { delay: 0.2, duration: 0.25 },
+                        }}
+                        exit={{
+                          opacity: 0,
+                          y: 10,
+                          scale: 0.9,
+                          transition: { duration: 0.25 },
+                        }}
+                        className="mt-1 sm:col-span-2 sm:mt-0"
+                      >
+                        <div className="flex max-w-full rounded-md shadow-sm">
+                          <span className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">
+                            @
+                          </span>
+                          <input
+                            type="text"
+                            name="username"
+                            id="username"
+                            autoComplete="username" // skipcq
+                            value={username}
+                            placeholder="Username"
+                            className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            onChange={(e) => setUsername(e.target.value)}
+                            onFocus={() => setShowUsernameHelpText(true)}
+                            onBlur={() => setShowUsernameHelpText(false)}
+                            required
+                          />
+                        </div>
+                        <AnimatePresence>
+                          {showUsernameHelpText && (
+                            <motion.p
+                              initial={{ opacity: 0 }}
+                              animate={{
+                                opacity: 1,
+                                transition: { delay: 0.1, duration: 0.3 },
+                              }}
+                              exit={{
+                                opacity: 0,
+                                transition: { duration: 0.2 },
+                              }}
+                              className="mt-1.5 text-[0.875rem] leading-[1rem] text-gray-500"
+                            >
+                              Usernames are case-insensitive and only contain
+                              letters, numbers, underscores, and periods.
+                            </motion.p>
+                          )}
                         </AnimatePresence>
-                    </motion.div>
-                  )}
+                      </motion.div>
+                    )}
                   </AnimatePresence>
 
                   <div>
                     <button
                       onClick={(e) => createSignupInstance(e)}
-                      className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       {showSpinner ? (
                         <div className="flex items-center justify-center space-x-3">
@@ -405,14 +420,8 @@ export default function SignupFunction({ appData }) {
                 <Link
                   href={`/signin?aidn=${appData.aidn}${
                     appData.testing ? `&testing=${appData.testingInfo}` : ""
-                  }${
-                    appData.platform
-                      ? `&platform=${appData.platform}`
-                      : ""
-                  }${
-                    appData.restrict
-                      ? `&restrict=${appData.restrict}`
-                      : ""
+                  }${appData.platform ? `&platform=${appData.platform}` : ""}${
+                    appData.restrict ? `&restrict=${appData.restrict}` : ""
                   }${
                     appData.inviteCode
                       ? `&inviteCode=${appData.inviteCode}`
@@ -428,7 +437,7 @@ export default function SignupFunction({ appData }) {
               <div>
                 <button
                   onClick={(e) => goBack(e)}
-                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Go back
                 </button>
