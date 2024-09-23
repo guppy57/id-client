@@ -14,7 +14,7 @@ export default function SigninFunction({ appData }) {
   const router = useRouter();
 
   // api data variables
-  const [email, setEmail] = useState("");
+  const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(true);
 
@@ -23,10 +23,6 @@ export default function SigninFunction({ appData }) {
   const [alertStyles, setAlertStyles] = useState("hidden");
   const [showPassword, setShowPassword] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
-
-  // regex expression for checking if a string is a valid email address
-  const regexExp =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/gi;
 
   React.useEffect(() => {
     // used to allow for checkbox changes
@@ -49,15 +45,8 @@ export default function SigninFunction({ appData }) {
 
     // verify that all the fields we want are not empty strings
     // if anyone of them are empty, error is shown
-    if (email === "" || password === "") {
+    if (emailOrUsername === "" || password === "") {
       changeAlert("Please make sure all fields are filled out");
-      return;
-    }
-
-    // make sure that the email entered is actually an email
-    // shows error if the string test doesn't pass
-    if (!regexExp.test(email)) {
-      changeAlert("Please enter a valid email address");
       return;
     }
 
@@ -68,7 +57,7 @@ export default function SigninFunction({ appData }) {
       .post("https://id-api.kreativeusa.com/v1/accounts/signin", {
         environment: appData.testing ? "development" : "production",
         aidn: parseInt(appData.aidn),
-        email: email.toLowerCase(),
+        emailOrUsername: emailOrUsername.toLowerCase(),
         password,
         rememberMe,
       })
@@ -140,19 +129,19 @@ export default function SigninFunction({ appData }) {
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="-space-y-px rounded-md shadow-sm">
                     <div>
-                      <label htmlFor="email-address" className="sr-only">
-                        Email address
+                      <label htmlFor="email-address-or-username" className="sr-only">
+                        Email or username 
                       </label>
                       <input
-                        id="email-address"
-                        value={email}
-                        name="email"
-                        type="email"
+                        id="email-address-or-username"
+                        value={emailOrUsername}
+                        name="emailOrUsername"
+                        type="text"
                         autoComplete="email"
                         required
                         className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 bg-white/80 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
-                        placeholder="Email address"
-                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email or username"
+                        onChange={(e) => setEmailOrUsername(e.target.value)}
                       />
                     </div>
                     <div className="relative flex flex-grow items-stretch focus-within:z-10">
