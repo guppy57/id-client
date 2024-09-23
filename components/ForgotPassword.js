@@ -7,10 +7,16 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import zxcvbn from "zxcvbn";
 import { motion } from "framer-motion";
-
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "./ui/input-otp";
 import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
 import ProgressBarComponent from "./ProgressBar";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
 
 export default function ForgotPasswordFunction({ appData }) {
   const router = useRouter();
@@ -359,17 +365,29 @@ export default function ForgotPasswordFunction({ appData }) {
                       <label htmlFor="email-address" className="sr-only">
                         Reset code
                       </label>
-                      <input
-                        id="reset-code"
+                      <InputOTP
+                        maxLength={6}
+                        className="w-full"
                         value={resetCode}
+                        id="reset-code"
                         name="resetCode"
-                        type="text"
-                        autoComplete="nope" // skipcq
+                        autoComplete="nope"
                         required
-                        className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                        placeholder="000000"
-                        onChange={(e) => setResetCode(e.target.value)}
-                      />
+                        onChange={(val) => setResetCode(val)}
+                        pattern={REGEXP_ONLY_DIGITS}
+                      >
+                        <InputOTPGroup className="bg-white">
+                          <InputOTPSlot index={0} />
+                          <InputOTPSlot index={1} />
+                          <InputOTPSlot index={2} />
+                        </InputOTPGroup>
+                        <InputOTPSeparator />
+                        <InputOTPGroup className="bg-white">
+                          <InputOTPSlot index={3} />
+                          <InputOTPSlot index={4} />
+                          <InputOTPSlot index={5} />
+                        </InputOTPGroup>
+                      </InputOTP>
                     </div>
                     <div>
                       <button
@@ -396,7 +414,6 @@ export default function ForgotPasswordFunction({ appData }) {
                       </button>
                     </div>
                   </div>
-
                   <div id="new-password" className={newPasswordStyles}>
                     <div className="relative flex flex-grow items-stretch focus-within:z-10">
                       <label htmlFor="password" className="sr-only">
