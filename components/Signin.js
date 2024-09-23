@@ -9,7 +9,7 @@ import axios from "axios";
 import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
 
-function SigninFunction({ appData }) {
+export default function SigninFunction({ appData }) {
   const router = useRouter();
 
   // api data variables
@@ -274,58 +274,4 @@ function SigninFunction({ appData }) {
       <Wallpaper />
     </div>
   );
-}
-
-export default function SigninComponent() {
-  const router = useRouter();
-  const { aidn, testing, platform, restrict, inviteCode } = router.query;
-  const [appData, setAppData] = useState();
-
-  // if the referrer is of url localhost
-  // then take the callbackUrl and parse out the domain name, https, so that all you have is the "/auth" part
-  // then make the callbackUrl http://localhost:3000/${callbackUrl}
-  React.useEffect(() => {
-    let mounted = true;
-  
-    if (!aidn) return;
-
-    axios
-      .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
-      .then((response) => {
-        let callbackUrl = response.data.data.callbackUrl;
-
-        if (platform === "mobile") {
-          callbackUrl = response.data.data.mobileCallbackUrl;
-        }
-
-        // check if the referrer is localhost
-        if (testing !== undefined) {
-          if (testing.includes("true") && testing.includes("local")) {
-            const url = new URL(response.data.data.callbackUrl);
-            callbackUrl = `http://localhost:3000${url.pathname}`;
-          } else if (testing.includes("true") && testing.includes("dev")) {
-            const url = new URL(response.data.data.callbackUrl);
-            callbackUrl = `https://docuvet-dev.kreativeusa.com${url.pathname}`;
-          }
-        }
-
-        setAppData({
-          testing: testing !== undefined,
-          aidn: response.data.data.aidn,
-          name: response.data.data.name,
-          testingInfo: testing,
-          callbackUrl,
-          platform,
-          restrict,
-          inviteCode
-        });
-        return () => (mounted = false);
-      })
-      .catch((error) => {
-        // unknown error
-        console.log(error);
-      });
-  }, [aidn, testing, platform, restrict, inviteCode]);
-
-  return <div>{appData && <SigninFunction appData={appData} />}</div>;
 }

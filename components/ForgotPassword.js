@@ -12,7 +12,7 @@ import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
 import ProgressBarComponent from "./ProgressBar";
 
-function ForgotPasswordFunction({ appData }) {
+export default function ForgotPasswordFunction({ appData }) {
   const router = useRouter();
   // api data variables
   const [email, setEmail] = useState("");
@@ -518,55 +518,4 @@ function ForgotPasswordFunction({ appData }) {
       </div>
     </div>
   );
-}
-
-export default function ForgotPasswordComponent() {
-  const router = useRouter();
-  const { aidn, testing, platform, restrict, inviteCode } = router.query;
-  const [appData, setAppData] = useState();
-
-  React.useEffect(() => {
-    let mounted = true;
-
-    if (!aidn) return;
-
-    axios
-      .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
-      .then((response) => {
-        let callbackUrl = response.data.data.callbackUrl;
-
-        if (platform === "mobile") {
-          callbackUrl = response.data.data.mobileCallbackUrl;
-        }
-
-        // check if the referrer is localhost
-        if (testing !== undefined) {
-          if (testing.includes("true") && testing.includes("local")) {
-            const url = new URL(response.data.data.callbackUrl);
-            callbackUrl = `http://localhost:3000${url.pathname}`;
-          } else if (testing.includes("true") && testing.includes("dev")) {
-            const url = new URL(response.data.data.callbackUrl);
-            callbackUrl = `https://docuvet-dev.kreativeusa.com${url.pathname}`;
-          }
-        }
-        
-        setAppData({
-          testing: testing !== undefined,
-          aidn: response.data.data.aidn,
-          name: response.data.data.name,
-          testingInfo: testing,
-          callbackUrl,
-          platform,
-          restrict,
-          inviteCode,
-        });
-        return () => (mounted = false);
-      })
-      .catch((error) => {
-        // unknown error
-        console.log(error);
-      });
-  }, [aidn, testing, platform, restrict, inviteCode]);
-
-  return <div>{appData && <ForgotPasswordFunction appData={appData} />}</div>;
 }

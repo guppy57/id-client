@@ -12,7 +12,7 @@ import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
 import ProgressBarComponent from "./ProgressBar";
 
-function SignupFunction({ appData }) {
+export default function SignupFunction({ appData }) {
   // api data variables
   const [username, setUsername] = useState("");
   const [fname, setFname] = useState("");
@@ -440,56 +440,4 @@ function SignupFunction({ appData }) {
       </div>
     </div>
   );
-}
-
-export default function SignupComponent() {
-  const router = useRouter();
-  const { aidn, testing, platform, restrict, inviteCode } = router.query;
-  const [appData, setAppData] = useState();
-
-  React.useEffect(() => {
-    let mounted = true;
-
-    // ensures nothing happens unless aidn is defined
-    if (!aidn) return;
-
-    axios
-      .get(`https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`)
-      .then((response) => {
-        let callbackUrl = response.data.data.callbackUrl;
-
-        if (platform === "mobile") {
-          callbackUrl = response.data.data.mobileCallbackUrl;
-        }
-
-        // check if the referrer is localhost
-        if (testing !== undefined) {
-          if (testing.includes("true") && testing.includes("local")) {
-            const url = new URL(response.data.data.callbackUrl);
-            callbackUrl = `http://localhost:3000${url.pathname}`;
-          } else if (testing.includes("true") && testing.includes("dev")) {
-            const url = new URL(response.data.data.callbackUrl);
-            callbackUrl = `https://docuvet-dev.kreativeusa.com${url.pathname}`;
-          }
-        }
-
-        setAppData({
-          aidn: response.data.data.aidn,
-          name: response.data.data.name,
-          testing: testing !== undefined,
-          testingInfo: testing,
-          callbackUrl,
-          platform,
-          restrict,
-          inviteCode,
-        });
-        return () => (mounted = false);
-      })
-      .catch((error) => {
-        // unknown error
-        console.log(error);
-      });
-  }, [aidn, testing, platform, restrict, inviteCode]);
-
-  return <div>{appData && <SignupFunction appData={appData} />}</div>;
 }
