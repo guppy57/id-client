@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import type { AppProps } from "next/app";w
 import { CookiesProvider } from "react-cookie";
 import localFont from "@next/font/local";
