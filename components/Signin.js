@@ -129,8 +129,11 @@ export default function SigninFunction({ appData }) {
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="-space-y-px rounded-md shadow-sm">
                     <div>
-                      <label htmlFor="email-address-or-username" className="sr-only">
-                        Email or username 
+                      <label
+                        htmlFor="email-address-or-username"
+                        className="sr-only"
+                      >
+                        Email or username
                       </label>
                       <input
                         id="email-address-or-username"

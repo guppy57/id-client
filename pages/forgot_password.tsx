@@ -16,6 +16,4 @@ export default function forgotPassword() {
       <Controller action="forgotpass" />
     </>
   );
-};
-
-
+}
