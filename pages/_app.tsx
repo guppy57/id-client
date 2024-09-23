@@ -65,7 +65,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Provider>
         <CookiesProvider>
-          <div className={`${satoshi.variable} font-sans`}>
+          <div className={`${satoshi.variable}`}>
             <Component {...pageProps} />
           </div>
         </CookiesProvider>

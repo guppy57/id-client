@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 
 export default function WallpaperComponent() {
@@ -18,14 +18,17 @@ export default function WallpaperComponent() {
   };
 
   useEffect(() => {
-    let mounted;
+    if (gradient != "") return;
 
     const randomGradient = getRandomGradient();
     setGradient(randomGradient);
-    return () => {
-      return (mounted = false);
-    };
-  }, [setGradient]);
+  }, [gradient, setGradient]);
 
-  return <div className={"absolute inset-0 -z-10 h-full w-full " + gradient} />;
+  return (
+    <div
+      className={
+        "absolute inset-0 -z-10 h-full w-full bg-gradient-to-bl from-amber-500 via-fuchsia-400 to-pink-500"
+      }
+    />
+  );
 }
