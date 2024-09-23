@@ -6,10 +6,10 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import zxcvbn from "zxcvbn";
 import { AnimatePresence, motion } from "framer-motion";
-
 import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
 import ProgressBarComponent from "./ProgressBar";
+import { createLink } from "../lib/utils";
 
 export default function SignupFunction({ appData }) {
   // api data variables
@@ -265,7 +265,6 @@ export default function SignupFunction({ appData }) {
                         />
                       </div>
                     </div>
-
                     <div>
                       <label htmlFor="email-address" className="sr-only">
                         Email address
@@ -418,15 +417,7 @@ export default function SignupFunction({ appData }) {
               <p className="mt-2 pt-2 text-center text-sm text-gray-600">
                 Have an account?{" "}
                 <Link
-                  href={`/signin?aidn=${appData.aidn}${
-                    appData.testing ? `&testing=${appData.testingInfo}` : ""
-                  }${appData.platform ? `&platform=${appData.platform}` : ""}${
-                    appData.restrict ? `&restrict=${appData.restrict}` : ""
-                  }${
-                    appData.inviteCode
-                      ? `&inviteCode=${appData.inviteCode}`
-                      : ""
-                  }`}
+                  href={createLink("signin", appData)}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Sign in here{" "}

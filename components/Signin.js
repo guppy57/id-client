@@ -8,6 +8,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
+import { createLink } from "../lib/utils";
 
 export default function SigninFunction({ appData }) {
   const router = useRouter();
@@ -207,23 +208,7 @@ export default function SigninFunction({ appData }) {
                     </div>
                     <div className="text-sm">
                       <Link
-                        href={`/forgot_password?aidn=${appData.aidn}${
-                          appData.testing
-                            ? `&testing=${appData.testingInfo}`
-                            : ""
-                        }${
-                          appData.restrict
-                            ? `&restrict=${appData.restrict}`
-                            : ""
-                        }${
-                          appData.platform
-                            ? `&platform=${appData.platform}`
-                            : ""
-                        }${
-                          appData.inviteCode
-                            ? `&inviteCode=${appData.inviteCode}`
-                            : ""
-                        }`}
+                        href={createLink("forgot_password", appData)}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                       >
                         Forgot your password?
@@ -260,17 +245,7 @@ export default function SigninFunction({ appData }) {
                 <p className="mt-2 pt-2 text-center text-sm text-gray-600">
                   Need an account?{" "}
                   <Link
-                    href={`/signup?aidn=${appData.aidn}${
-                      appData.testing ? `&testing=${appData.testingInfo}` : ""
-                    }${
-                      appData.platform ? `&platform=${appData.platform}` : ""
-                    }${
-                      appData.restrict ? `&restrict=${appData.restrict}` : ""
-                    }${
-                      appData.inviteCode
-                        ? `&inviteCode=${appData.inviteCode}`
-                        : ""
-                    }`}
+                    href={createLink("signup", appData)}
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     Sign up here{" "}

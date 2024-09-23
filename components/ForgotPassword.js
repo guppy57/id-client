@@ -17,6 +17,7 @@ import AlertComponent from "./Alert";
 import Wallpaper from "./Wallpaper";
 import ProgressBarComponent from "./ProgressBar";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
+import { createLink } from "../lib/utils";
 
 export default function ForgotPasswordFunction({ appData }) {
   const router = useRouter();
@@ -502,15 +503,7 @@ export default function ForgotPasswordFunction({ appData }) {
               <p className="mt-2 pt-2 text-center text-sm text-gray-600">
                 Got your password?{" "}
                 <Link
-                  href={`/signin?aidn=${appData.aidn}${
-                    appData.testing ? `&testing=${appData.testingInfo}` : ""
-                  }${appData.restrict ? `&restrict=${restrict}` : ""}${
-                    appData.platform ? `&platform=${appData.platform}` : ""
-                  }${
-                    appData.inviteCode
-                      ? `&inviteCode=${appData.inviteCode}`
-                      : ""
-                  }`}
+                  href={createLink("signin", appData)}
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   Sign in{" "}
