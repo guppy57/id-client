@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";w
+import type { AppProps } from "next/app";
 import { CookiesProvider } from "react-cookie";
 import localFont from "@next/font/local";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
