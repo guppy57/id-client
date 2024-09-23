@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "../lib/utils";
 import { useEffect, useState } from "react";
 
 export default function WallpaperComponent() {
@@ -18,6 +19,7 @@ export default function WallpaperComponent() {
   };
 
   useEffect(() => {
+    console.log(gradient);
     if (gradient != "") return;
 
     const randomGradient = getRandomGradient();
@@ -25,10 +27,6 @@ export default function WallpaperComponent() {
   }, [gradient, setGradient]);
 
   return (
-    <div
-      className={
-        "absolute inset-0 -z-10 h-full w-full bg-gradient-to-bl from-amber-500 via-fuchsia-400 to-pink-500"
-      }
-    />
+    <div className={cn("absolute inset-0 -z-10 h-full w-full", gradient)} />
   );
 }
