@@ -245,7 +245,7 @@ export default function SignupFunction({ appData }) {
                           name="first-name"
                           id="first-name"
                           value={fname}
-                          className="relative block w-full rounded-none rounded-tl-md border-gray-300 focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          className="relative block w-full rounded-none rounded-tl-md border-gray-300 focus:z-10 focus:border-black focus:ring-black sm:text-sm"
                           placeholder="First name"
                           onChange={(e) => setFname(e.target.value)}
                         />
@@ -259,7 +259,7 @@ export default function SignupFunction({ appData }) {
                           name="last-name"
                           id="last-name"
                           value={lname}
-                          className="relative block w-full rounded-none rounded-tr-md border-gray-300 focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                          className="relative block w-full rounded-none rounded-tr-md border-gray-300 focus:z-10 focus:border-black focus:ring-black sm:text-sm"
                           placeholder="Last name"
                           onChange={(e) => setLname(e.target.value)}
                         />
@@ -276,7 +276,7 @@ export default function SignupFunction({ appData }) {
                         autoComplete="nope"
                         value={email}
                         required
-                        className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                         placeholder="Email address"
                         onChange={(e) => {
                           setEmail(e.target.value);
@@ -298,7 +298,7 @@ export default function SignupFunction({ appData }) {
                         autoComplete="new-password"
                         value={password}
                         required
-                        className="relative block w-full appearance-none rounded-none rounded-bl-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="relative block w-full appearance-none rounded-none rounded-bl-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                         placeholder="Password"
                         onChange={(e) => handlePasswordInput(e.target.value)}
                       />
@@ -358,7 +358,7 @@ export default function SignupFunction({ appData }) {
                             autoComplete="username" // skipcq
                             value={username}
                             placeholder="Username"
-                            className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-black focus:ring-black sm:text-sm"
                             onChange={(e) => setUsername(e.target.value)}
                             onFocus={() => setShowUsernameHelpText(true)}
                             onBlur={() => setShowUsernameHelpText(false)}
@@ -389,15 +389,19 @@ export default function SignupFunction({ appData }) {
                   </AnimatePresence>
 
                   <div>
-                    <button
+                    <motion.button
+                      whileHover={{
+                        scale: 0.95,
+                        transition: { duration: 0.2, ease: "linear" },
+                      }}
                       onClick={(e) => createSignupInstance(e)}
-                      className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="group relative flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                     >
                       {showSpinner ? (
                         <div className="flex items-center justify-center space-x-3">
                           <span>Signing you up...</span>
                           <motion.span
-                            className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
+                            className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-black"
                             animate={{ rotate: 360 }}
                             transition={{
                               duration: 1,
@@ -410,7 +414,7 @@ export default function SignupFunction({ appData }) {
                       ) : (
                         "Sign up"
                       )}
-                    </button>
+                    </motion.button>
                   </div>
                 </form>
               </div>
@@ -418,7 +422,7 @@ export default function SignupFunction({ appData }) {
                 Have an account?{" "}
                 <Link
                   href={createLink("signin", appData)}
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                  className="font-bold text-black hover:text-indigo-500"
                 >
                   Sign in here{" "}
                 </Link>
@@ -428,7 +432,7 @@ export default function SignupFunction({ appData }) {
               <div>
                 <button
                   onClick={(e) => goBack(e)}
-                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                 >
                   Go back
                 </button>

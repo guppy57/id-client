@@ -150,7 +150,7 @@ export default function SigninFunction({ appData }) {
                         type="email"
                         autoComplete="email"
                         required
-                        className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 bg-white/80 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 bg-white/80 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                         placeholder="Email address"
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -166,7 +166,7 @@ export default function SigninFunction({ appData }) {
                         type={showPassword ? "text" : "password"}
                         autoComplete="current-password"
                         required
-                        className="relative block w-full appearance-none rounded-none rounded-bl-md border border-gray-300 bg-white/80 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="relative block w-full appearance-none rounded-none rounded-bl-md border border-gray-300 bg-white/80 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
                         placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -196,7 +196,7 @@ export default function SigninFunction({ appData }) {
                         checked={rememberMe}
                         name="remember-me"
                         type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        className="h-4 w-4 rounded border-gray-300 text-black focus:ring-black"
                         onChange={(e) => handleCheckedChange(e)}
                       />
                       <label
@@ -209,22 +209,26 @@ export default function SigninFunction({ appData }) {
                     <div className="text-sm">
                       <Link
                         href={createLink("forgot_password", appData)}
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                        className="font-medium text-gray-500 hover:text-indigo-500 focus:ring-black"
                       >
                         Forgot your password?
                       </Link>
                     </div>
                   </div>
                   <div>
-                    <button
+                    <motion.button
+                      whileHover={{
+                        scale: 0.95,
+                        transition: { duration: 0.2, ease: "linear" },
+                      }}
                       onClick={(e) => createSigninInstance(e)}
-                      className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="group relative flex w-full justify-center rounded-md border border-transparent transition-colors duration-200 bg-black py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                     >
                       {showSpinner ? (
                         <div className="flex items-center justify-center space-x-3">
                           <span>Signing in...</span>
                           <motion.span
-                            className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
+                            className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-black"
                             animate={{ rotate: 360 }}
                             transition={{
                               duration: 1,
@@ -237,7 +241,7 @@ export default function SigninFunction({ appData }) {
                       ) : (
                         "Sign in"
                       )}
-                    </button>
+                    </motion.button>
                   </div>
                 </form>
               </div>
@@ -246,7 +250,7 @@ export default function SigninFunction({ appData }) {
                   Need an account?{" "}
                   <Link
                     href={createLink("signup", appData)}
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                    className="font-bold text-black hover:text-indigo-500"
                   >
                     Sign up here{" "}
                   </Link>

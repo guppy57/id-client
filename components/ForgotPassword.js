@@ -331,21 +331,25 @@ export default function ForgotPasswordFunction({ appData }) {
                         type="email"
                         autoComplete="email"
                         required
-                        className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-gray-500 sm:text-sm"
                         placeholder="Email address"
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                     <div>
-                      <button
+                      <motion.button
+                        whileHover={{
+                          scale: 0.95,
+                          transition: { duration: 0.2, ease: "linear" },
+                        }}
                         onClick={(e) => findAccount(e)}
-                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                       >
                         {showSpinner ? (
                           <div className="flex items-center justify-center space-x-3">
                             <span>Sending your code...</span>
                             <motion.span
-                              className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
+                              className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-black"
                               animate={{ rotate: 360 }}
                               transition={{
                                 duration: 1,
@@ -358,7 +362,7 @@ export default function ForgotPasswordFunction({ appData }) {
                         ) : (
                           "Reset password"
                         )}
-                      </button>
+                      </motion.button>
                     </div>
                   </div>
                   <div id="verify-code" className={verifyCodeStyles}>
@@ -391,15 +395,19 @@ export default function ForgotPasswordFunction({ appData }) {
                       </InputOTP>
                     </div>
                     <div>
-                      <button
+                      <motion.button
+                        whileHover={{
+                          scale: 0.95,
+                          transition: { duration: 0.2, ease: "linear" },
+                        }}
                         onClick={(e) => verifyCode(e)}
-                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="group relative flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                       >
                         {showSpinner ? (
                           <div className="flex items-center justify-center space-x-3">
                             <span>Verifying...</span>
                             <motion.span
-                              className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
+                              className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-black"
                               animate={{ rotate: 360 }}
                               transition={{
                                 duration: 1,
@@ -412,7 +420,7 @@ export default function ForgotPasswordFunction({ appData }) {
                         ) : (
                           "Verify reset code"
                         )}
-                      </button>
+                      </motion.button>
                     </div>
                   </div>
                   <div id="new-password" className={newPasswordStyles}>
@@ -427,7 +435,7 @@ export default function ForgotPasswordFunction({ appData }) {
                         type={showNewPassword ? "text" : "password"}
                         autoComplete="new-password"
                         required
-                        className="relative block w-full appearance-none rounded-none rounded-tl-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="relative block w-full appearance-none rounded-none rounded-tl-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-gray-500 sm:text-sm"
                         placeholder="New password"
                         onChange={(e) => handlePasswordInput(e.target.value)}
                       />
@@ -460,7 +468,7 @@ export default function ForgotPasswordFunction({ appData }) {
                         type="password"
                         autoComplete="confirm-password" // skipcq
                         required
-                        className="relative mb-3 block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        className="relative mb-3 block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-gray-500 sm:text-sm"
                         placeholder="Confirm password"
                         onChange={(e) => setCPassword(e.target.value)}
                       />
@@ -474,15 +482,19 @@ export default function ForgotPasswordFunction({ appData }) {
                       />
                     </div>
                     <div>
-                      <button
+                      <motion.button
+                        whileHover={{
+                          scale: 0.95,
+                          transition: { duration: 0.2, ease: "linear" },
+                        }}
                         onClick={(e) => createNewPassword(e)}
-                        className="group relative mt-3 flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="group relative mt-3 flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                       >
                         {showSpinner ? (
                           <div className="flex items-center justify-center space-x-3">
                             <span>Updating your password...</span>
                             <motion.span
-                              className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-indigo-600"
+                              className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-black"
                               animate={{ rotate: 360 }}
                               transition={{
                                 duration: 1,
@@ -495,7 +507,7 @@ export default function ForgotPasswordFunction({ appData }) {
                         ) : (
                           "Set new password"
                         )}
-                      </button>
+                      </motion.button>
                     </div>
                   </div>
                 </form>
@@ -504,7 +516,7 @@ export default function ForgotPasswordFunction({ appData }) {
                 Got your password?{" "}
                 <Link
                   href={createLink("signin", appData)}
-                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                  className="font-bold text-black hover:text-indigo-500"
                 >
                   Sign in{" "}
                 </Link>
@@ -514,7 +526,7 @@ export default function ForgotPasswordFunction({ appData }) {
               <div>
                 <button
                   onClick={(e) => goBack(e)}
-                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-blacck py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                 >
                   Return to sign in
                 </button>
