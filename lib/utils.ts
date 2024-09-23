@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function createLink(page, appData) {
+export function createLink(page: string, appData: any): string {
   let base = "/" + page + "?aidn=" + appData.aidn;
 
   base += appData.testing ? `&testing=${appData.testingInfo}` : "";
