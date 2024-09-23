@@ -19,12 +19,12 @@ export default function Controller({ action }) {
       let app;
 
       if (storedAppData.aidn != 0) {
-        console.log('stored app data is sufficient')
+        console.log("stored app data is sufficient");
         app = storedAppData;
       } else {
-        console.log("fetching app data")
+        console.log("fetching app data");
         const response = await fetch(
-          `https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`
+          `https://id-api.kreativeusa.com/v1/applications/${aidn}/basic`,
         );
 
         if (!response.ok) console.log(response);
