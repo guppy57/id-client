@@ -23,6 +23,7 @@ export default function SigninFunction({ appData }) {
   const [alertStyles, setAlertStyles] = useState("hidden");
   const [showPassword, setShowPassword] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [signInBtnText, setSignInBtnText] = useState("Signing in...");
 
   React.useEffect(() => {
     // used to allow for checkbox changes
@@ -62,6 +63,7 @@ export default function SigninFunction({ appData }) {
         rememberMe,
       })
       .then((response) => {
+        setSignInBtnText("Redirecting you...")
         goBack(response.data.data.keychain.key);
       })
       .catch((error) => {
@@ -215,7 +217,7 @@ export default function SigninFunction({ appData }) {
                     >
                       {showSpinner ? (
                         <div className="flex items-center justify-center space-x-3">
-                          <span>Signing in...</span>
+                          <span>{signInBtnText}</span>
                           <motion.span
                             className="flex h-4 w-4 items-center rounded-full border-2 border-white border-t-black"
                             animate={{ rotate: 360 }}
