@@ -39,11 +39,11 @@ export default function ForgotPasswordFunction({ appData }) {
   // page element variables
   const [title, setTitle] = useState("Reset your password");
   const [subtitle, setSubtitle] = useState(
-    `for your account and continue to ${appData.name}`
+    `for your account and continue to ${appData.name}`,
   );
   const [formStyles, setFormStyles] = useState("mt-8");
   const [findAccountStyles, setFindAccountStyles] = useState(
-    "-space-y-px rounded-md shadow-sm"
+    "-space-y-px rounded-md shadow-sm",
   );
   const [verifyCodeStyles, setVerifyCodeStyles] = useState("hidden");
   const [newPasswordStyles, setNewPasswordStyles] = useState("hidden");
@@ -88,28 +88,28 @@ export default function ForgotPasswordFunction({ appData }) {
         "Password is weak",
         "h-2.5 w-4/12 rounded-full bg-red-600",
         "20%",
-        "text-sm text-red-600"
+        "text-sm text-red-600",
       );
     } else if (passwordScore === 1) {
       changeProgressBar(
         "Password is good",
         "h-2.5 w-8/12 rounded-full bg-yellow-500",
         "75%",
-        "text-sm text-yellow-500"
+        "text-sm text-yellow-500",
       );
     } else if (passwordScore === 2 || passwordScore === 3) {
       changeProgressBar(
         "Password is getting stronger",
         "h-2.5 w-11/12 rounded-full bg-orange-500",
         "90%",
-        "text-sm text-orange-500"
+        "text-sm text-orange-500",
       );
     } else {
       changeProgressBar(
         "This password is hard to crack!",
         "h-2.5 w-12/12 rounded-full bg-green-700",
         "100%",
-        "text-sm text-green-700"
+        "text-sm text-green-700",
       );
     }
   };
@@ -148,7 +148,7 @@ export default function ForgotPasswordFunction({ appData }) {
           setKsn(response.data.data.ksn);
           setTitle("Verify your reset code");
           setSubtitle(
-            `We sent a six-digit reset code to your email at ${email}. Enter it below to continue.`
+            `We sent a six-digit reset code to your email at ${email}. Enter it below to continue.`,
           );
         }
       })
@@ -192,7 +192,7 @@ export default function ForgotPasswordFunction({ appData }) {
         `https://id-api.kreativeusa.com/v1/accounts/${ksn}/resetCode/verify`,
         {
           code: parseInt(resetCode),
-        }
+        },
       )
       .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
@@ -251,7 +251,7 @@ export default function ForgotPasswordFunction({ appData }) {
           {
             password,
             resetCode: parseInt(resetCode),
-          }
+          },
         )
         .then((response) => {
           setShowSpinner(false);
@@ -271,7 +271,7 @@ export default function ForgotPasswordFunction({ appData }) {
           } else if (statusCode === 401) {
             // the reset code is incorrect
             changeAlert(
-              "Uh oh, the reset code is incorrect. Please try again later."
+              "Uh oh, the reset code is incorrect. Please try again later.",
             );
           } else {
             // some sort of unknown error on the client side
@@ -439,7 +439,7 @@ export default function ForgotPasswordFunction({ appData }) {
                         placeholder="New password"
                         onChange={(e) => handlePasswordInput(e.target.value)}
                         onKeyDown={(e) => {
-                            if (e.key === "Enter") e.preventDefault();
+                          if (e.key === "Enter") e.preventDefault();
                         }}
                       />
                       <button

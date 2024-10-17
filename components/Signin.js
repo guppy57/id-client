@@ -63,7 +63,7 @@ export default function SigninFunction({ appData }) {
         rememberMe,
       })
       .then((response) => {
-        setSignInBtnText("Redirecting you...")
+        setSignInBtnText("Redirecting you...");
         goBack(response.data.data.keychain.key);
       })
       .catch((error) => {
@@ -131,8 +131,11 @@ export default function SigninFunction({ appData }) {
                   <input type="hidden" name="remember" defaultValue="true" />
                   <div className="-space-y-px rounded-md shadow-sm">
                     <div>
-                      <label htmlFor="email-address-or-username" className="sr-only">
-                        Email or username 
+                      <label
+                        htmlFor="email-address-or-username"
+                        className="sr-only"
+                      >
+                        Email or username
                       </label>
                       <input
                         id="email-address-or-username"
