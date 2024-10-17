@@ -438,6 +438,9 @@ export default function ForgotPasswordFunction({ appData }) {
                         className="relative block w-full appearance-none rounded-none rounded-tl-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-gray-500 sm:text-sm"
                         placeholder="New password"
                         onChange={(e) => handlePasswordInput(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") e.preventDefault();
+                        }}
                       />
                       <button
                         type="button"
@@ -471,6 +474,9 @@ export default function ForgotPasswordFunction({ appData }) {
                         className="relative mb-3 block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-black focus:outline-none focus:ring-gray-500 sm:text-sm"
                         placeholder="Confirm password"
                         onChange={(e) => setCPassword(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") e.preventDefault();
+                        }}
                       />
                     </div>
                     <div className={barWrapperClass}>
@@ -526,7 +532,7 @@ export default function ForgotPasswordFunction({ appData }) {
               <div>
                 <button
                   onClick={(e) => goBack(e)}
-                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-blacck py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                  className="group relative flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white shadow-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                 >
                   Return to sign in
                 </button>
