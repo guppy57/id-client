@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.kreativeusa.docuvetapp",
+      "sha256_cert_fingerprints": [
+        "29:23:C5:62:10:9C:7F:69:4C:D8:E9:2B:F0:21:46:C3:E0:66:7A:A3:BA:D5:2F:C0:93:C5:28:F7:A8:82:2C:38"
+      ]
+    }
+  }
+]
